@@ -5,7 +5,7 @@ import org.junit.Test;
 /*************************************************************************
  *  Maximum Priority Queue test class.
  *
- *  @version 1.0 25/3/21
+ *  @version 1.0 29/3/21
  *
  *  @author Brian Whelan
  *
@@ -112,7 +112,6 @@ public class MaxPQTest
     	maxPQ.insert(4);
     	maxPQ.insert(10);
     	maxPQ.insert(2);
-    	System.out.print(maxPQ.toString());
     	assertEquals("Testing toString on a non-empty maximum priority queue", "<- (Next Out) 10 4 7 2 <- (Last In)\n", maxPQ.toString()); 
     }
 }
