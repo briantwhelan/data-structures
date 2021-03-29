@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /*************************************************************************
  *  Stack class.
  *
@@ -24,6 +26,13 @@ public class Stack<Item>
      */
 	public void push(Item item)
 	{
+		//Resize stack if it becomes full
+		if(index == stack.length)
+		{
+			resize(2 * stack.length);
+		}
+		
+		//Add item to stack
 		stack[index] = item;
 		index++;
 	}
@@ -35,9 +44,17 @@ public class Stack<Item>
      */
 	public Item pop()
 	{
+		//Remove item from top of stack
 		index--;
 		Item item = stack[index];
 		stack[index] = null;
+		
+		//Resize stack if it is only 1/4 full
+		if((index > 0) && (index == stack.length/4))
+		{
+			resize(stack.length/2);
+		}
+		
 		return item;
 	}
 	
@@ -49,6 +66,21 @@ public class Stack<Item>
 	public Item peek()
 	{
 		return stack[index - 1];
+	}
+	
+	/**
+     *  Resize array
+     *
+     *  @param size: the new size the array is to be resized to
+     */
+	private void resize(int size)
+	{
+		Item[] temp = (Item[]) new Object[size];
+		for(int i = 0; i < index; i++)
+		{
+			temp[i] = stack[i];
+		}
+		stack = temp;
 	}
 	
 	/**
@@ -76,5 +108,4 @@ public class Stack<Item>
 	{
 		return index;
 	}
-
 }
