@@ -54,6 +54,25 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
+     * Find whether an item is in the minimum priority queue
+     * 
+     * @param item: item to be found in minimum priority queue
+     */
+	public boolean contains(Item item)
+	{
+		boolean itemExists = false;
+		for(int i = 1; i < size && !itemExists; i++)
+		{
+			if(pq[i].compareTo(item) == 0)
+			{
+				itemExists = true;
+			}
+		}
+		
+		return itemExists;
+	}
+	
+	/**
      * Check whether the minimum priority queue is empty
      * 
      * @return is the minimum priority queue empty?

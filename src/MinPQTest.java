@@ -58,6 +58,25 @@ public class MinPQTest
     }
     
     /**
+     * Test contains()
+     */
+    @Test
+    public void testContains()
+    {
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
+    	minPQ.insert(7);
+    	minPQ.insert(4);
+    	minPQ.insert(10);
+    	minPQ.insert(2);
+    	    	
+    	//Test contains for an element that does exist in the minimum priority queue
+    	assertEquals("Testing for an element that does exist in the minimum priority queue", true, minPQ.contains(new Integer(4)));
+    	
+    	//Test contains for an element that doesn't exist in the minimum priority queue
+    	assertEquals("Testing for an element that doesn't exist in the minimum priority queue", false, minPQ.contains(new Integer(6)));
+    }
+    
+    /**
      * Test isEmpty()
      */
     @Test
