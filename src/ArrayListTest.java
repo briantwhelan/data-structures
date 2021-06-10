@@ -10,7 +10,7 @@ import org.junit.Test;
  *************************************************************************/
 public class ArrayListTest 
 {
-	/**
+    /**
      * Test ArrayList() 
      */
     @Test
@@ -55,7 +55,7 @@ public class ArrayListTest
     	assertEquals("Testing size()", 3, arrayList.size());
     }
     
-	/**
+    /**
      * Test add(T element)
      */
     @Test

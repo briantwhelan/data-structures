@@ -11,7 +11,7 @@ public class ArrayList<T>
 	private T[] arrayList;
 	private int size;
 	
-	/**
+    /**
      * Create an empty ArrayList.
      */
 	public ArrayList()
@@ -20,7 +20,7 @@ public class ArrayList<T>
 		size = 0;
 	}
 	
-	/**
+    /**
      * Create an empty ArrayList with specified capacity.
      * 
      * @param initialCapacity: initial capacity of the ArrayList
@@ -36,7 +36,7 @@ public class ArrayList<T>
 		else throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
 	}
 	
-	/**
+    /**
      * Create an ArrayList from specified array.
      * 
      * @param array: array to convert to an ArrayList
@@ -52,7 +52,7 @@ public class ArrayList<T>
 		size = array.length;
 	}
 	
-	/**
+    /**
      * Return the size of the ArrayList (i.e. the number of elements currently in the ArrayList).
      * 
      * @return size of the ArrayList (i.e. the number of elements currently in the ArrayList)
@@ -62,7 +62,7 @@ public class ArrayList<T>
 		return size;
 	}
 	
-	/**
+    /**
      * Add an element to the ArrayList.
      * 
      * @param element: element to add to the ArrayList
@@ -74,7 +74,7 @@ public class ArrayList<T>
 		resize();
 	}
 	
-	/**
+    /**
      * Resize the ArrayList if necessary (i.e. if it is full, double the ArrayList size, and 
      * if it is only 1/4 full, half the ArrayList size)
      */
@@ -101,7 +101,7 @@ public class ArrayList<T>
 		}
 	}
 	
-	/**
+    /**
      * Remove an element at a specified index from the ArrayList.
      * 
      * @param index: index of element to remove from the ArrayList
@@ -122,7 +122,7 @@ public class ArrayList<T>
 		return element;
 	}
 	
-	/**
+    /**
      * Shift elements in the ArrayList (if necessary) to ensure that elements are together
      * (i.e. not interleaved with null elements).
      * 
