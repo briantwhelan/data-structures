@@ -67,6 +67,7 @@ public class Stack<T>
      *
      *  @param newSize: the new size the array is to be resized to
      *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than size of new array
+     *  @throws NegativeArraySizeException if newSize is negative
      */
     private void resize(int newSize)
     {
