@@ -8,6 +8,8 @@
  *************************************************************************/
 public class ArrayList<T>
 {
+    private static final int DEFAULT_INITIAL_CAPACITY = 10;
+	
     private T[] arrayList;
     private int size;
 	
@@ -16,7 +18,7 @@ public class ArrayList<T>
      */
     public ArrayList()
     {
-    	arrayList = (T[]) new Object[1];
+    	arrayList = (T[]) new Object[DEFAULT_INITIAL_CAPACITY];
     	size = 0;
     }
 	
@@ -69,35 +71,32 @@ public class ArrayList<T>
      */
     public void add(T element)
     {
-    	arrayList[size] = element;
-    	size++;
-    	resize();
-    }
-	
-    /**
-     * Resize the ArrayList if necessary (i.e. if it is full, double the ArrayList size, and 
-     * if it is only 1/4 full, half the ArrayList size)
-     */
-    private void resize()
-    {
+    	//Resize ArrayList if it becomes full
     	if(size == arrayList.length)
     	{
-    		T[] temp = (T[]) new Object[2 * arrayList.length];
-    		for(int i = 0; i < arrayList.length; i++)
-    		{
-    			temp[i] = arrayList[i];
-    		}
-    		arrayList = temp;	
+    		resize(2 * arrayList.length);
     	}
-    	else if(size <= arrayList.length/4)
+		
+    	//Add element to ArrayList
+    	arrayList[size] = element;
+    	size++;
+    }
+    
+    /**
+     *  Resize array.
+     *
+     *  @param newSize: the new size the array is to be resized to
+     *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than size of new array
+     *  @throws NegativeArraySizeException if newSize is negative
+     */
+    private void resize(int newSize)
+    {
+    	T[] temp = (T[]) new Object[newSize];
+    	for(int i = 0; i < size; i++)
     	{
-    		T[] temp = (T[]) new Object[arrayList.length/2];
-    		for(int i = 0; i < arrayList.length/4; i++)
-    		{
-    			temp[i] = arrayList[i];
-    		}
-    		arrayList = temp;
+    		temp[i] = arrayList[i];
     	}
+    	arrayList = temp;
     }
 	
     /**
@@ -111,11 +110,17 @@ public class ArrayList<T>
     	T element = null;
     	if((index >= 0) && (index < size))
     	{
+    		//Remove element from specified index
     		element = arrayList[index];
     		arrayList[index] = null;
     		shiftElements(index);
     		size--;
-    		resize();
+    		
+    		//Resize ArrayList if it is only 1/4 full
+	    	if((size > 0) && (size <= arrayList.length/4))
+	    	{
+	    		resize(arrayList.length/2);
+	    	}
     	}
 		
     	return element;
