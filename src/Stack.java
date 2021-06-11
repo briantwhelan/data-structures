@@ -8,7 +8,7 @@
  *************************************************************************/
 public class Stack<T>
 {
-	private static final int DEFAULT_INITIAL_CAPACITY = 10;
+    private static final int DEFAULT_INITIAL_CAPACITY = 10;
 	
     private T[] stack;
     private int size;
