@@ -14,11 +14,11 @@ public class ArrayList<T>
     /**
      * Create an empty ArrayList.
      */
-	public ArrayList()
-	{
-		arrayList = (T[]) new Object[1];
-		size = 0;
-	}
+    public ArrayList()
+    {
+    	arrayList = (T[]) new Object[1];
+    	size = 0;
+    }
 	
     /**
      * Create an empty ArrayList with specified capacity.
@@ -26,15 +26,15 @@ public class ArrayList<T>
      * @param initialCapacity: initial capacity of the ArrayList
      * @throws IllegalArgumentException if initialCapacity is negative
      */
-	public ArrayList(int initialCapacity)
-	{
-		if(initialCapacity > 0)
-		{
-			arrayList = (T[]) new Object[initialCapacity];
-			size = 0;
-		}
-		else throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
-	}
+    public ArrayList(int initialCapacity)
+    {
+    	if(initialCapacity > 0)
+    	{
+    		arrayList = (T[]) new Object[initialCapacity];
+    		size = 0;
+    	}
+    	else throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+    }
 	
     /**
      * Create an ArrayList from specified array.
