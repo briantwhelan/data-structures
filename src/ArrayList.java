@@ -128,13 +128,13 @@ public class ArrayList<T>
      * @param indexRemoved: index of element that was previously removed from the ArrayList
      */
     private void shiftElements(int indexRemoved)
-	{
-		for(int index = indexRemoved; index < size - 1; index++) 
-		{
-			arrayList[index] = arrayList[index + 1];
-			arrayList[index + 1] = null;
-		}
-	}
+    {
+    	for(int index = indexRemoved; index < size - 1; index++) 
+    	{
+    		arrayList[index] = arrayList[index + 1];
+    		arrayList[index + 1] = null;
+    	}
+    }
 	
    /**
     * Get an element at a specified index from the ArrayList.
