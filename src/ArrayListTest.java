@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  ArrayList test class.
  *
- *  @version 1.0 10/6/21
+ *  @version 11/6/21
  *
  *  @author Brian Whelan
  *
