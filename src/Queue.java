@@ -47,7 +47,7 @@ public class Queue<T>
     /**
      * Add an element to the Queue.
      * 
-     * @param element: element to add to the Queue
+     * @param element: the element to add to the Queue
      */
     public void add(T element)
     {
@@ -143,7 +143,7 @@ public class Queue<T>
      	String string = "Head - ";
      	for(int index = 0; index < size; index++)
      	{
-     		string += queue[index] + ((index < size - 1) ? " " : "");
+     		string += queue[index] + ((index < size - 1) ? "," : "");
      	}
      	string += " - Tail";
      	

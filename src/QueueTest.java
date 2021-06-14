@@ -58,9 +58,9 @@ public class QueueTest
     	queue.add(5);
     	assertEquals("Testing add(T element)", "Head - 5 - Tail", queue.toString());
     	queue.add(10);
-    	assertEquals("Testing add(T element)", "Head - 5 10 - Tail", queue.toString());
+    	assertEquals("Testing add(T element)", "Head - 5,10 - Tail", queue.toString());
     	queue.add(15);
-    	assertEquals("Testing add(T element)", "Head - 5 10 15 - Tail", queue.toString());
+    	assertEquals("Testing add(T element)", "Head - 5,10,15 - Tail", queue.toString());
     }
     
     /**
@@ -109,8 +109,8 @@ public class QueueTest
     	queue.add(5);
     	assertEquals("Testing toString()", "Head - 5 - Tail", queue.toString());
     	queue.add(10);
-    	assertEquals("Testing toString()", "Head - 5 10 - Tail", queue.toString());
+    	assertEquals("Testing toString()", "Head - 5,10 - Tail", queue.toString());
     	queue.add(15);
-    	assertEquals("Testing toString()", "Head - 5 10 15 - Tail", queue.toString());
+    	assertEquals("Testing toString()", "Head - 5,10,15 - Tail", queue.toString());
     }
 }
