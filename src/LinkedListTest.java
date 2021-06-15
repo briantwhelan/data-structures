@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  LinkedList test class.
  *
- *  @version 14/6/21
+ *  @version 15/6/21
  *
  *  @author Brian Whelan
  *

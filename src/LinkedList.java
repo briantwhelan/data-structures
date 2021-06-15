@@ -82,7 +82,8 @@ public class LinkedList<T>
     	if((index == 0) && (index < size))
     	{
     		element = head.data;
-    		head = null;    		
+    		head = head.next;    	
+    		size--;
     	}
     	else if((index > 0) && (index < size))
     	{
@@ -94,8 +95,9 @@ public class LinkedList<T>
     		}
     		element = currentNode.data;
     		currentNode = null;
+    		size--;
     	}
-    	size--;
+    	
     	
     	return element;
     }
