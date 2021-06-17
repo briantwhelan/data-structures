@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  DoublyLinkedList test class.
  *
- *  @version 15/6/21
+ *  @version 17/6/21
  *
  *  @author Brian Whelan
  *

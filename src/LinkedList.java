@@ -1,5 +1,5 @@
 /*************************************************************************
- *  Linked List.
+ *  LinkedList class.
  *
  *  @version 15/6/21
  *
@@ -16,6 +16,11 @@ public class LinkedList<T>
     	private final T data;
     	private Node next;
     	
+    	/**
+         * Create a Node with the specified attributes.
+         * @param data: the date to be stored within the Node
+         * @param next: the next Node in the LinkedList
+         */
     	public Node(T data, Node next)
     	{
     		this.data = data;

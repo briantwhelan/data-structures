@@ -54,20 +54,20 @@ public class LinkedListTest
     }
     
     /**
-     * Test remove()
+     * Test remove(int index)
      */
     @Test
     public void testRemove()
     {
     	LinkedList<Integer> linkedList = new LinkedList();
     	
-    	assertEquals("Testing remove()", null, linkedList.remove(0));
+    	assertEquals("Testing remove(int index)", null, linkedList.remove(0));
     	linkedList.add(5);
     	linkedList.add(10);
     	linkedList.add(15);
-    	assertEquals("Testing remove()", 15, (int)linkedList.remove(2));
-    	assertEquals("Testing remove()", 5, (int)linkedList.remove(0));
-    	assertEquals("Testing remove()", 10, (int)linkedList.remove(0));
+    	assertEquals("Testing remove(int index)", 15, (int)linkedList.remove(2));
+    	assertEquals("Testing remove(int index)", 5, (int)linkedList.remove(0));
+    	assertEquals("Testing remove(int index)", 10, (int)linkedList.remove(0));
     }
     
     /**

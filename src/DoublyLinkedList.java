@@ -1,7 +1,7 @@
 /*************************************************************************
  *  DoublyLinkedList class.
  *
- *  @version 15/6/21
+ *  @version 17/6/21
  *
  *  @author Brian Whelan
  *
@@ -16,7 +16,13 @@ public class DoublyLinkedList<T>
     	private final T data;
     	private Node next, previous;
     	
-    	public Node(T data, Node next, Node previous)
+    	/**
+         * Create a Node with the specified attributes.
+         * @param data: the date to be stored within the Node
+         * @param previous: the previous Node in the DoublyLinkedList
+         * @param next: the next Node in the DoublyLinkedList
+         */
+    	public Node(T data, Node previous, Node next)
     	{
     		this.data = data;
     		this.next = next;
@@ -186,24 +192,6 @@ public class DoublyLinkedList<T>
    		      size--;
        	  }
          }
-//    	if((index == 0) && (index < size))
-//    	{
-//    		element = head.data;
-//    		head = head.next;    	
-//    		size--;
-//    	}
-//    	else if((index > 0) && (index < size))
-//    	{
-//    		Node currentNode = head;
-//    		for(int currentIndex = 0; (currentNode.next != null) && (currentIndex < index); 
-//    												currentNode = currentNode.next, currentIndex++)
-//    		{
-//    			//Traverse LinkedList to element at index before the element to be removed
-//    		}
-//    		element = currentNode.data;
-//    		currentNode = null;
-//    		size--;
-//    	}
   
     	return element;
     }
@@ -239,18 +227,33 @@ public class DoublyLinkedList<T>
       @Override
       public String toString()
       {
-      	String string = "Head - "; 
-      	if(head != null)
+      	String string = "Head - ";       	
+      	for(Node currentNode = head; currentNode != null; currentNode = currentNode.next)
       	{
-	      	Node currentNode = head;
-	      	while(currentNode != null) 
-	      	{
-	      		string += currentNode.data + ",";
-	      		currentNode = currentNode.next;
-	      	}
-	      	string += currentNode.data;
+      		string += currentNode.data + ((currentNode.next != null) ? "," : "");
       	}
       	string += " - Tail";
+      	
       	return string;
+      	
+      	
+//        StringBuilder s = new StringBuilder();
+//        boolean isFirst = true; 
+//
+//        // iterate over the list, starting from the head
+//        for(DLLNode iter = head; iter != null; iter = iter.next)
+//        {
+//          if(!isFirst)
+//          {
+//            s.append(",");
+//          } 
+//          else
+//          {
+//            isFirst = false;
+//          }
+//          s.append(iter.data.toString());
+//        }
+//
+//        return s.toString();
       }
 }
