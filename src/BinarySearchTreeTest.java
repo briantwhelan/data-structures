@@ -10,222 +10,317 @@ import org.junit.Test;
  *************************************************************************/
 public class BinarySearchTreeTest
 {	
+	/**
+     * Test BinarySearchTree() 
+     */
 	@Test
 	public void testConstructor()
 	{
 		new BinarySearchTree<Integer, Integer>();		     
 	}
 	
-//	@Test
-//	public void testIsEmpty()
-//	{
-//		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-//		assertEquals("Testing isEmpty for an empty tree", true, BinarySearchTree.isEmpty());
-//		
-//		BinarySearchTree.put(7, 7);
-//		assertEquals("Testing isEmpty for a non-empty tree", false, BinarySearchTree.isEmpty());	
-//	}
-	
+	/**
+     * Test size() 
+     */
 	@Test
 	public void testSize()
 	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing size for an empty tree", 0, BinarySearchTree.size());
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-		BinarySearchTree.put(7, 7);
-		assertEquals("Testing size for a non-empty tree with 1 node", 1, BinarySearchTree.size());	
-		
-		BinarySearchTree.put(8, 8);
-		assertEquals("Testing size for a non-empty tree with 2 nodes", 2, BinarySearchTree.size());	
+		assertEquals("Testing size()", 0, binarySearchTree.size());
+		binarySearchTree.put(5, 5);
+		assertEquals("Testing size()", 1, binarySearchTree.size());	
+		binarySearchTree.put(15, 15);
+		assertEquals("Testing size()", 2, binarySearchTree.size());	
+		binarySearchTree.put(10, 10);
+		assertEquals("Testing size()", 3, binarySearchTree.size());	
 	}
 	
-	@Test
-	public void testContains()
-	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing contains for an empty tree", false, BinarySearchTree.contains(8));
-		
-		BinarySearchTree.put(7, 7);
-		assertEquals("Testing contains for a non-empty tree with key", false, BinarySearchTree.contains(8));	
-		
-		BinarySearchTree.put(8, 8);
-		assertEquals("Testing contains for a non-empty tree without key", true, BinarySearchTree.contains(8));	
-	}
-	
+	/**
+     * Test get(Key key)  
+     */
 	@Test
 	public void testGet()
 	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing get for an empty tree", null, (Integer)BinarySearchTree.get(8));
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-  		BinarySearchTree.put(7, 7);   //        _7_
-  		BinarySearchTree.put(8, 8);   //      /     \
-  		BinarySearchTree.put(3, 3);   //    _3_      8
-  		BinarySearchTree.put(1, 1);   //  /     \
-  		BinarySearchTree.put(2, 2);   // 1       6
-  		BinarySearchTree.put(6, 6);   //  \     /
-  		BinarySearchTree.put(4, 4);   //   2   4
-  		BinarySearchTree.put(5, 5);   //        \
-  						 //         5
-  		
-		assertEquals("Testing get for a non-empty tree without key", null, (Integer)BinarySearchTree.get(9));	
-		
-		BinarySearchTree.put(8, 8);
-		assertEquals("Testing get for a non-empty tree with key", 8, (int)BinarySearchTree.get(8));	
-		
-		BinarySearchTree.put(8, 8);
-		assertEquals("Testing get for a non-empty tree with key", 2, (int)BinarySearchTree.get(2));	
+		assertEquals("Testing get(Key key)", null, binarySearchTree.get(8));
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \
+  		binarySearchTree.put(2, 2);   // 1       6
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+		assertEquals("Testing get(Key key)", null, binarySearchTree.get(9));	
+		assertEquals("Testing get(Key key)", 8, (int)binarySearchTree.get(8));	
+		assertEquals("Testing get(Key key)", 2, (int)binarySearchTree.get(2));	
 	}
 	
+	/**
+     * Test contains(Key key)  
+     */
+	@Test
+	public void testContains()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));
+		binarySearchTree.put(5, 5);
+		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));	
+		binarySearchTree.put(10, 10);
+		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(10));	
+		binarySearchTree.put(15, 15);
+		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(5));	
+	}
+	
+	
+	/**
+     * Test put(Key key, Value value)  
+     */
 	@Test
 	public void testPut()
 	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing put for an empty tree", "()", BinarySearchTree.printKeysInOrder());
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-  		BinarySearchTree.put(7, 7);   //        _7_
-  		BinarySearchTree.put(8, 8);   //      /     \
-  		BinarySearchTree.put(3, 3);   //    _3_      8
-  		BinarySearchTree.put(1, 1);   //  /     \
-  		BinarySearchTree.put(2, 2);   // 1       6
-  		BinarySearchTree.put(6, 6);   //  \     /
-  		BinarySearchTree.put(4, 4);   //   2   4
-  		BinarySearchTree.put(5, 5);   //        \
-  						 //         5
-      
-  		assertEquals("Testing put for a non-empty tree",
-  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
-  		
-  		BinarySearchTree.put(8, 10);
-  		assertEquals("Testing put when key is reused(should update val))",
-  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
-  		
-  		BinarySearchTree.put(8, null);
-  		assertEquals("Testing put when val is null(should delete)",
-  				"(((()1(()2()))3((()4(()5()))6()))7())", BinarySearchTree.printKeysInOrder());
+		assertEquals("Testing put(Key key, Value value)", "()", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \
+  		binarySearchTree.put(2, 2);   // 1       6
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(8, 10);
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(8, null);
+  		assertEquals("\"Testing put(Key key, Value value)\"",
+  				"(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
 	}
 	  
+	/**
+     * Test height()  
+     */
 	@Test
 	public void testHeight()
   	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing height for an empty tree", -1, BinarySearchTree.height());
-	  
-		BinarySearchTree.put(7, 7);
-		assertEquals("Testing height for a non-empty tree with 1 node", 0, BinarySearchTree.height());
-		BinarySearchTree.put(8, 8); 
-		assertEquals("Testing height for a non-empty tree with 2 nodes", 1, BinarySearchTree.height());
-		BinarySearchTree.put(3, 3);  
-		assertEquals("Testing height for a non-empty tree with 3 nodes", 1, BinarySearchTree.height());
-    	BinarySearchTree.put(1, 1);      
-    	assertEquals("Testing height for a non-empty tree with 4 nodes", 2, BinarySearchTree.height());
-    	BinarySearchTree.put(2, 2);      
-    	assertEquals("Testing height for a non-empty tree with 5 nodes", 3, BinarySearchTree.height());
-    	BinarySearchTree.put(6, 6);      
-    	assertEquals("Testing height for a non-empty tree with 6 nodes", 3, BinarySearchTree.height());
-    	BinarySearchTree.put(4, 4);      
-    	assertEquals("Testing height for a non-empty tree with 7 nodes", 3, BinarySearchTree.height());
-    	BinarySearchTree.put(5, 5); 
-    	assertEquals("Testing height for a non-empty tree with 8 nodes", 4, BinarySearchTree.height());     
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing height()", -1, binarySearchTree.height());
+		binarySearchTree.put(7, 7);
+		assertEquals("Testing height()", 0, binarySearchTree.height());
+		binarySearchTree.put(8, 8); 
+		assertEquals("Testing height()", 1, binarySearchTree.height());
+		binarySearchTree.put(3, 3);  
+		assertEquals("Testing height()", 1, binarySearchTree.height());
+    	binarySearchTree.put(1, 1);      
+    	assertEquals("Testing height()", 2, binarySearchTree.height());
+    	binarySearchTree.put(2, 2);      
+    	assertEquals("Testing height()", 3, binarySearchTree.height());
+    	binarySearchTree.put(6, 6);      
+    	assertEquals("Testing height()", 3, binarySearchTree.height());
+    	binarySearchTree.put(4, 4);      
+    	assertEquals("Testing height()", 3, binarySearchTree.height());
+    	binarySearchTree.put(5, 5); 
+    	assertEquals("Testing height()", 4, binarySearchTree.height());     
   	}
 	
+	/**
+     * Test median()  
+     */
 	@Test
 	public void testMedian()
   	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing median for an empty tree", null, BinarySearchTree.median());
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-		BinarySearchTree.put(7, 7);
-		assertEquals("Testing median for a non-empty tree with 1 node", new Integer(7), BinarySearchTree.median());
-		BinarySearchTree.put(8, 8); 
-		assertEquals("Testing median for a non-empty tree with 2 nodes", new Integer(7), BinarySearchTree.median());
-		BinarySearchTree.put(3, 3);  
-		assertEquals("Testing median for a non-empty tree with 3 nodes", new Integer(7), BinarySearchTree.median());
-    	BinarySearchTree.put(1, 1);      
-    	assertEquals("Testing median for a non-empty tree with 4 nodes", new Integer(3), BinarySearchTree.median());
-    	BinarySearchTree.put(2, 2);      
-    	assertEquals("Testing median for a non-empty tree with 5 nodes", new Integer(3), BinarySearchTree.median());
-    	BinarySearchTree.put(6, 6);      
-    	assertEquals("Testing median for a non-empty tree with 6 nodes", new Integer(3), BinarySearchTree.median());
-    	BinarySearchTree.put(4, 4);      
-    	assertEquals("Testing median for a non-empty tree with 7 nodes", new Integer(4), BinarySearchTree.median());
-    	BinarySearchTree.put(5, 5); 
-    	assertEquals("Testing median for a non-empty tree with 8 nodes", new Integer(4), BinarySearchTree.median());
+		assertEquals("Testing median()", null, binarySearchTree.median());
+		binarySearchTree.put(7, 7);
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+		binarySearchTree.put(8, 8); 
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+		binarySearchTree.put(3, 3);  
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+    	binarySearchTree.put(1, 1);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(2, 2);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(6, 6);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(4, 4);      
+    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
+    	binarySearchTree.put(5, 5); 
+    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
   	}
 	
+	/**
+     * Test select(int numberOfSmallerKeys) 
+     */
 	@Test
 	public void testSelect()
   	{
-		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-		assertEquals("Testing select for an empty tree", null, BinarySearchTree.median());
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-		BinarySearchTree.put(7, 7);
-		assertEquals("Testing select for a non-empty tree with 1 node", new Integer(7), BinarySearchTree.select(0));
-		BinarySearchTree.put(8, 8); 
-		assertEquals("Testing select for a non-empty tree with 2 nodes", new Integer(8), BinarySearchTree.select(1));
-		BinarySearchTree.put(3, 3);  
-		assertEquals("Testing select for a non-empty tree with 3 nodes", new Integer(8), BinarySearchTree.select(2));
-    	BinarySearchTree.put(1, 1);      
-    	assertEquals("Testing select for a non-empty tree with 4 nodes", new Integer(1), BinarySearchTree.select(0));
-    	BinarySearchTree.put(2, 2);      
-    	assertEquals("Testing select for a non-empty tree with 5 nodes", new Integer(2), BinarySearchTree.select(1));
-    	BinarySearchTree.put(6, 6);      
-    	assertEquals("Testing select for a non-empty tree with 6 nodes", new Integer(6), BinarySearchTree.select(3));
-    	BinarySearchTree.put(4, 4);      
-    	assertEquals("Testing select for a non-empty tree with 7 nodes", new Integer(4), BinarySearchTree.select(3));
-    	BinarySearchTree.put(5, 5);
-    	assertEquals("Testing select for a non-empty tree with 8 nodes", new Integer(5), BinarySearchTree.select(4));
-    	assertEquals("Testing select for a non-empty tree with 8 nodes", null, BinarySearchTree.select(9));
-    	assertEquals("Testing select for a non-empty tree with 8 nodes", null, BinarySearchTree.select(-2));
+		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(0));
+		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(-2));		
+		binarySearchTree.put(7, 7);
+		assertEquals("Testing select(int numberOfSmallerKeys)", 7, (int)binarySearchTree.select(0));
+		binarySearchTree.put(8, 8); 
+		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(1));
+		binarySearchTree.put(3, 3);  
+		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(2));
+    	binarySearchTree.put(1, 1);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 1, (int)binarySearchTree.select(0));
+    	binarySearchTree.put(2, 2);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 2, (int)binarySearchTree.select(1));
+    	binarySearchTree.put(6, 6);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 6, (int)binarySearchTree.select(3));
+    	binarySearchTree.put(4, 4);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 4, (int)binarySearchTree.select(3));
+    	binarySearchTree.put(5, 5);
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 5, (int)binarySearchTree.select(4));    	
   	}
+	
+	/**
+     * Test delete(Key key) 
+     */
+    @Test
+    public void testDelete() 
+    {
+        BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+        
+        binarySearchTree.delete(1);
+        assertEquals("Testing delete(Key key)", "()", binarySearchTree.printKeysInOrder());
+        binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //      /     \
+        binarySearchTree.put(3, 3);   //    _3_      8
+        binarySearchTree.put(1, 1);   //  /     \
+        binarySearchTree.put(2, 2);   // 1       6
+        binarySearchTree.put(6, 6);   //  \     /
+        binarySearchTree.put(4, 4);   //   2   4
+        binarySearchTree.put(5, 5);   //        \
+                         			  //         5           
+        binarySearchTree.delete(9);
+        assertEquals("Testing delete(Key key)",
+                "(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(8);
+        assertEquals("Testing delete(Key key)", "(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(6);
+        assertEquals("Testing delete(Key key)",
+                "(((()1(()2()))3(()4(()5())))7())", binarySearchTree.printKeysInOrder());
+        binarySearchTree.delete(3);
+        assertEquals("Testing delete(Key key)",
+                "(((()1())2(()4(()5())))7())", binarySearchTree.printKeysInOrder());
+        
+        binarySearchTree = new BinarySearchTree<Integer, Integer>();
+        
+        binarySearchTree.put(7, 7);   //        _7_
+        binarySearchTree.put(8, 8);   //      /     \
+        binarySearchTree.put(3, 3);   //    _3_      8
+        binarySearchTree.put(1, 1);   //  /     \
+        binarySearchTree.put(2, 2);   // 1       6
+        binarySearchTree.put(6, 6);   //  \     /
+        binarySearchTree.put(4, 4);   //   2   4
+        binarySearchTree.put(5, 5);   //        \
+        							  //         5
+        binarySearchTree.delete(1);
+        assertEquals("Testing delete(Key key)",
+                "(((()2())3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+    } 
+    
+    /**
+     * Test deleteMax() 
+     */
+	@Test
+	public void testDeleteMax()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		binarySearchTree.deleteMax();
+		assertEquals("Testing deleteMax()", "()", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \    
+  		binarySearchTree.put(2, 2);   // 1       6  
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"((()1(()2()))3((()4(()5()))6()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.deleteMax();
+  		assertEquals("Testing deleteMax()",
+  				"((()1(()2()))3(()4(()5())))", binarySearchTree.printKeysInOrder());
+	}
+	
+	/**
+     * Test max() 
+     */
+	@Test
+	public void testMax()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing max()", null, binarySearchTree.max());
+  		binarySearchTree.put(5, 5); 
+  		assertEquals("Testing max()", 5, (int)binarySearchTree.max());
+  		binarySearchTree.put(15, 15);
+  		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
+  		binarySearchTree.put(10, 10); 
+  		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
+	}
   
+	/**
+     * Test printKeysInOrder() 
+     */
   	@Test
   	public void testPrintKeysInOrder() 
   	{
-  		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-  		BinarySearchTree.printKeysInOrder();
-  		assertEquals("Printing keys in an empty tree", "()", BinarySearchTree.printKeysInOrder());
-      
-  		BinarySearchTree.put(7, 7);   //        _7_
-  		BinarySearchTree.put(8, 8);   //      /     \
-  		BinarySearchTree.put(3, 3);   //    _3_      8
-  		BinarySearchTree.put(1, 1);   //  /     \
-  		BinarySearchTree.put(2, 2);   // 1       6
-  		BinarySearchTree.put(6, 6);   //  \     /
-  		BinarySearchTree.put(4, 4);   //   2   4
-  		BinarySearchTree.put(5, 5);   //        \
-  						 //         5
-      
-  		assertEquals("Printing keys in non-empty tree",
-  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
+  		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+  		
+  		assertEquals("Testing printKeysInOrder()", "()", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \
+  		binarySearchTree.put(2, 2);   // 1       6
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  						 			  //         5
+  		assertEquals("Testing printKeysInOrder()",
+  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
   	}
-  
-  	@Test
- 	public void testPrettyPrint() 
+   	
+  	/**
+     * Test toString() 
+     */
+ 	@Test
+ 	public void testToString() 
  	{
-         BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-         assertEquals("Checking pretty printing of empty tree",
-                 "-null\n", BinarySearchTree.prettyPrintKeys());
-          
-                              //  -7
-                              //   |-3
-                              //   | |-1
-                              //   | | |-null
-         BinarySearchTree.put(7, 7);       //   | |  -2
-         BinarySearchTree.put(8, 8);       //   | |   |-null
-         BinarySearchTree.put(3, 3);       //   | |    -null
-         BinarySearchTree.put(1, 1);       //   |  -6
-         BinarySearchTree.put(2, 2);       //   |   |-4
-         BinarySearchTree.put(6, 6);       //   |   | |-null
-         BinarySearchTree.put(4, 4);       //   |   |  -5
-         BinarySearchTree.put(5, 5);       //   |   |   |-null
-                              //   |   |    -null
-                              //   |    -null
-                              //    -8
-                              //     |-null
-                              //      -null
+         BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
          
-         String result = 
+         assertEquals("Testing toString()", "-null\n", binarySearchTree.toString());
+         binarySearchTree.put(7, 7);
+         binarySearchTree.put(8, 8);       
+         binarySearchTree.put(3, 3);     
+         binarySearchTree.put(1, 1);      
+         binarySearchTree.put(2, 2);      
+         binarySearchTree.put(6, 6);     
+         binarySearchTree.put(4, 4);      
+         binarySearchTree.put(5, 5);       
+         String expectedString = 
           "-7\n" +
           " |-3\n" + 
           " | |-1\n" +
@@ -243,89 +338,6 @@ public class BinarySearchTreeTest
           "  -8\n" +
           "   |-null\n" +
           "    -null\n";
-         assertEquals("Checking pretty printing of non-empty tree", result, BinarySearchTree.prettyPrintKeys());
+         assertEquals("Testing toString()", expectedString, binarySearchTree.toString());
      }
-
-  
-     @Test
-     public void testDelete() 
-     {
-         BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-         BinarySearchTree.delete(1);
-         assertEquals("Deleting from empty tree", "()", BinarySearchTree.printKeysInOrder());
-         
-         BinarySearchTree.put(7, 7);   //        _7_
-         BinarySearchTree.put(8, 8);   //      /     \
-         BinarySearchTree.put(3, 3);   //    _3_      8
-         BinarySearchTree.put(1, 1);   //  /     \
-         BinarySearchTree.put(2, 2);   // 1       6
-         BinarySearchTree.put(6, 6);   //  \     /
-         BinarySearchTree.put(4, 4);   //   2   4
-         BinarySearchTree.put(5, 5);   //        \
-                          //         5
-         
-         assertEquals("Checking order of constructed tree",
-                 "(((()1(()2()))3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
-         
-         BinarySearchTree.delete(9);
-         assertEquals("Deleting non-existent key",
-                 "(((()1(()2()))3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
- 
-         BinarySearchTree.delete(8);
-         assertEquals("Deleting leaf", "(((()1(()2()))3((()4(()5()))6()))7())", BinarySearchTree.printKeysInOrder());
- 
-         BinarySearchTree.delete(6);
-         assertEquals("Deleting node with single child",
-                 "(((()1(()2()))3(()4(()5())))7())", BinarySearchTree.printKeysInOrder());
- 
-         BinarySearchTree.delete(3);
-         assertEquals("Deleting node with two children",
-                 "(((()1())2(()4(()5())))7())", BinarySearchTree.printKeysInOrder());
-         
-         BinarySearchTree = new BinarySearchTree<Integer, Integer>();
-         
-         BinarySearchTree.put(7, 7);   //        _7_
-         BinarySearchTree.put(8, 8);   //      /     \
-         BinarySearchTree.put(3, 3);   //    _3_      8
-         BinarySearchTree.put(1, 1);   //  /     \
-         BinarySearchTree.put(2, 2);   // 1       6
-         BinarySearchTree.put(6, 6);   //  \     /
-         BinarySearchTree.put(4, 4);   //   2   4
-         BinarySearchTree.put(5, 5);   //        \
-                          //         5
-         
-         BinarySearchTree.delete(1);
-         assertEquals("Deleting node with single child",
-                 "(((()2())3((()4(()5()))6()))7(()8()))", BinarySearchTree.printKeysInOrder());
-     } 
-     
- 	@Test
- 	public void testDeleteMax()
- 	{
- 		BinarySearchTree<Integer, Integer> BinarySearchTree = new BinarySearchTree<Integer, Integer>();
- 		BinarySearchTree.deleteMax();
- 		assertEquals("Testing deleteMax for an empty tree", "()", BinarySearchTree.printKeysInOrder());
- 		
-   		BinarySearchTree.put(7, 7);   //        _7_
-   		BinarySearchTree.put(8, 8);   //      /     \
-   		BinarySearchTree.put(3, 3);   //    _3_      8
-   		BinarySearchTree.put(1, 1);   //  /     \    
-   		BinarySearchTree.put(2, 2);   // 1       6  
-   		BinarySearchTree.put(6, 6);   //  \     /
-   		BinarySearchTree.put(4, 4);   //   2   4
-   		BinarySearchTree.put(5, 5);   //        \
-   						 //         5
-       
-   		
-   		BinarySearchTree.deleteMax();
-   		assertEquals("Testing deleteMax for a non-empty tree",
-   				"(((()1(()2()))3((()4(()5()))6()))7())", BinarySearchTree.printKeysInOrder());
-   		BinarySearchTree.deleteMax();
-   		assertEquals("Testing deleteMax for a non-empty tree",
-   				"((()1(()2()))3((()4(()5()))6()))", BinarySearchTree.printKeysInOrder());
-   		BinarySearchTree.deleteMax();
-   		assertEquals("Testing deleteMax for a non-empty tree",
-   				"((()1(()2()))3(()4(()5())))", BinarySearchTree.printKeysInOrder());
- 	}
 }
-

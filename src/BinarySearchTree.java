@@ -40,7 +40,6 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	root = null;
     }
 
-    // return number of key-value pairs in BST
     /**
      * Return the size of the BinarySearchTree (i.e. the number of Nodes currently in the BinarySearchTree).
      * 
@@ -51,7 +50,6 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	return size(root); 
     }
 
-    // return number of key-value pairs in BST rooted at node
     /**
      * Return the size of the tree rooted at the specified Node.
      * 
@@ -69,8 +67,6 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         return size;
     }
 
-    //*  Search BST for given key.
-   // *  What is the value associated with given key?
     /**
      *  Get the value associated with a specified Key (if it exists) from the BinarySearchTree.
      *
@@ -331,12 +327,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     * Deletes a key from a tree (if the key is in the tree).
-     * Note that this method works symmetrically from the Hibbard deletion:
-     * If the node to be deleted has two child nodes, then it needs to be
-     * replaced with its predecessor (not its successor) node.
+     * Delete the specified Key (if it exists) from the BinarySearchTree.
+     * (Similar to Hibbard deletion but uses predecessor instead of successor)
      *
-     * @param key the key to delete
+     * @param key: the Key to delete from the BinarySearchTree
      */
     public void delete(Key key) 
     {
@@ -346,6 +340,14 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	}
     }
     
+    /**
+     * (Recursively) Delete the specified Key (if it exists) from the tree rooted at the specified Node.
+     * (Similar to Hibbard deletion but uses predecessor instead of successor)
+     *
+     * @param node: the root Node from which to delete specified Key
+     * @param key: the Key to delete from the the tree rooted at the specified Node
+     * @return the Node that has been updated
+     */
     private Node delete(Node node, Key key)
     { 
     	Node updatedNode = null;
@@ -394,7 +396,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Deletes the maximum key in the tree
+     * Delete the maximum Key (if it exists) from the BinarySearchTree.
      */
     public void deleteMax() 
     {
@@ -404,57 +406,70 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	}
     }
     
-    private Node deleteMax(Node x)
-    {
-    	Node node;
-    	if(x.right == null) 
-    	{
-    		node = x.left;
-    	}
-    	else
-    	{
-    		x.right = deleteMax(x.right);
-    		x.size = 1 + size(x.left) + size(x.right);
-    		node = x;
-    	}
-    	return node;
-    }
-    
     /**
-     * Returns the node with the maximum key in the tree
+     * Delete the maximum Key (if it exists) from the tree rooted at the specified Node.
      * 
-     * @return the node with the maximum key in the tree
+     * @param node: the root Node from which to delete maximum Key
+     * @return the Node that has been updated
      */
-//    public Node max() 
-//    {
-//    	Node max = null;
-//    	if(root != null)
-//    	{
-//    		max = max(root);
-//    	}
-//    	return max;
-//    }
-    
-    private Node max(Node x)
+    private Node deleteMax(Node node)
     {
-    	Node node;
-    	if(x.right == null) 
+    	Node updatedNode = null;
+    	if(node.right == null) 
     	{
-    		node = x;
+    		updatedNode = node.left;
     	}
     	else
     	{
-    		node = max(x.right);
+    		node.right = deleteMax(node.right);
+    		node.size = 1 + size(node.left) + size(node.right);
+    		updatedNode = node;
     	}
-    	return node;
+    	
+    	return updatedNode;
+    }
+    
+    /**
+     * Return the Value associated with the Node with the maximum Key in the BinarySearchTree.
+     * 
+     * @return the Value associated with the Node with the maximum Key in the BinarySearchTree
+     */
+    public Value max() 
+    {
+    	Value max = null;
+    	if(root != null)
+    	{
+    		max = max(root).value;
+    	}
+    	return max;
+    }
+    
+    /**
+     * (Recursively) Return the Node with the maximum Key in the tree rooted at the specified Node.
+     * 
+     * @param node: the root Node from which to get the maximum Key
+     * @return the Node with the maximum Key in the tree rooted at the specified Node
+     */
+    private Node max(Node node)
+    {
+    	Node max;
+    	if(node.right == null) 
+    	{
+    		max = node;
+    	}
+    	else
+    	{
+    		max = max(node.right);
+    	}
+    	
+    	return max;
     }
 
 
     /**
-     * Print all keys of the tree in a sequence, in-order.
-     * That is, for each node, the keys in the left subtree should appear before the key in the node.
-     * Also, for each node, the keys in the right subtree should appear before the key in the node.
-     * For each subtree, its keys should appear within a parenthesis.
+     * Return a String containing all keys of the BinarySearchTree in-order with parentheses
+     * (i.e. for each Node, the keys in the left subtree appear before the Key in the Node 
+     * and the keys in the right subtree appear after the Key in the Node).
      *
      * Example 1: Empty tree -- output: "()"
      * Example 2: Tree containing only "A" -- output: "(()A())"
@@ -467,9 +482,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
      *
      * output: "((()A())B(()C(()D())))"
      *
-     * output of example in the assignment: (((()A(()C()))E((()H(()M()))R()))S(()X()))
-     *
-     * @return a String with all keys in the tree, in order, parenthesized.
+     * @return a String containing all keys of the BinarySearchTree in-order with parentheses
      */
     public String printKeysInOrder() 
     {
@@ -482,9 +495,30 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	{
     		keysInOrder = printKeysInOrder(root);
     	}
+    	
     	return keysInOrder;
     }
     
+    /**
+     * (Recursively) Return a String containing all keys of the tree rooted at the specified Node 
+     * in-order with parentheses (i.e. for each Node, the keys in the left subtree appear before 
+     * the Key in the Node and the keys in the right subtree appear after the Key in the Node).
+     *
+     * Example 1: Empty tree -- output: "()"
+     * Example 2: Tree containing only "A" -- output: "(()A())"
+     * Example 3: Tree:
+     *   B
+     *  / \
+     * A   C
+     *      \
+     *       D
+     *
+     * output: "((()A())B(()C(()D())))"
+     *
+     * @param node: the root Node from which to get a String containing the keys in-order
+     * @return a String containing all keys of the tree rooted at the specified Node in-order 
+     * with parentheses
+     */
     private String printKeysInOrder(Node node)
     {
     	String keysInOrder = "";
@@ -496,41 +530,52 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	{
     		keysInOrder = "(" + printKeysInOrder(node.left) + node.key + printKeysInOrder(node.right) + ")";
     	}
+    	
     	return keysInOrder;
     }
     
     /**
-     * Pretty Printing the tree. Each node is on one line -- see assignment for details.
+     * Get a String representation of the BinarySearchTree.
      *
-     * @return a multi-line string with the pretty ascii picture of the tree.
+     * @return a String representation of the BinarySearchTree
      */
-    public String prettyPrintKeys() 
+    @Override
+    public String toString() 
     {
-    	String treeAsString = "";
+    	String string = "";
     	if(root == null)
     	{
-    		treeAsString = "-null\n";
+    		string = "-null\n";
     	}
     	else
     	{
-    		treeAsString = prettyPrintKeys(root, "");
+    		string = toString(root, "");
     	}
-    	return treeAsString;
+    	
+    	return string;
     }
     
-    private String prettyPrintKeys(Node node, String prefix)
+    /**
+     * (Recursively) Get a String representation of the tree rooted at the specified Node.
+     *
+     * @param node: the root Node from which to get a String representation
+     * @param prefix: the current String representation of the tree rooted at the specified Node 
+     * @return a String representation of the tree rooted at the specified Node
+     */
+    private String toString(Node node, String prefix)
     {
-    	String treeAsString = "";
+    	String string = "";
     	if(node == null)
     	{
-    		treeAsString = prefix + "-null\n";
+    		string = prefix + "-null\n";
     	}
     	else
     	{
-    		treeAsString = prefix + "-" + node.key + "\n"
-    						+ prettyPrintKeys(node.left, prefix + " |")  
-    						+ prettyPrintKeys(node.right, prefix + "  ");
+    		string = prefix + "-" + node.key + "\n"
+    						+ toString(node.left, prefix + " |")  
+    						+ toString(node.right, prefix + "  ");
     	}
-    	return treeAsString;
+    	
+    	return string;
     }
 }
