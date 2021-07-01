@@ -3,9 +3,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 /*************************************************************************
- *  Maximum Priority Queue test class.
+ *  MaxPQ test class.
  *
- *  @version 1.0 29/3/21
+ *  @version 1/7/21
  *
  *  @author Brian Whelan
  *
@@ -13,7 +13,7 @@ import org.junit.Test;
 public class MaxPQTest 
 {    
     /**
-     * Test constructor 
+     * Test MaxPQ()
      */
     @Test
     public void testConstructor()
@@ -22,18 +22,17 @@ public class MaxPQTest
     }
     
 	/**
-     * Test insert()
+     * Test insert(T item)
      */
     @Test
     public void testInsert()
     {
     	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
     	
-    	//Test inserting elements 
     	maxPQ.insert(7);
-    	assertEquals("Testing insert", 1, maxPQ.size());
+    	assertEquals("Testing insert(T item)", 1, maxPQ.size());
     	maxPQ.insert(4);
-    	assertEquals("Testing insert", 2, maxPQ.size());
+    	assertEquals("Testing insert(T item)", 2, maxPQ.size());
     }
     
     /**
@@ -45,17 +44,17 @@ public class MaxPQTest
     	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
     	
     	//Test deleting maximum element on empty maximum priority queue
-    	assertEquals("Testing deleteMax on an empty maximum priority queue", null, maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", null, maxPQ.deleteMax());
     	
     	//Test deleting maximum element on non-empty maximum priority queue
     	maxPQ.insert(7);
     	maxPQ.insert(4);
     	maxPQ.insert(10);
     	maxPQ.insert(2);
-    	assertEquals("Testing deleteMax on a non-empty maximum priority queue", new Integer(10), maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax on a non-empty maximum priority queue", new Integer(7), maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax on a non-empty maximum priority queue", new Integer(4), maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax on a non-empty maximum priority queue", new Integer(2), maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", 10, (int)maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", 7, (int)maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", 4, (int)maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", 2, (int)maxPQ.deleteMax());
     }
     
     /**
@@ -67,14 +66,14 @@ public class MaxPQTest
     	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
     	
     	//Test isEmpty on empty maximum priority queue
-    	assertEquals("Testing isEmpty on an empty maximum priority queue", true, maxPQ.isEmpty());
+    	assertEquals("Testing isEmpty()", true, maxPQ.isEmpty());
     	
     	//Test isEmpty on non-empty maximum priority queue
     	maxPQ.insert(7);
     	maxPQ.insert(4);
     	maxPQ.insert(10);
     	maxPQ.insert(2);
-    	assertEquals("Testing isEmpty on a non-empty maximum priority queue", false, maxPQ.isEmpty());
+    	assertEquals("Testing isEmpty()", false, maxPQ.isEmpty());
     }
     
     /**
@@ -86,14 +85,14 @@ public class MaxPQTest
     	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
     	
     	//Test getting size in empty maximum priority queue
-    	assertEquals("Testing size in an empty maximum priority queue", 0, maxPQ.size());
+    	assertEquals("Testing size()", 0, maxPQ.size());
     	
     	//Test getting size in non-empty maximum priority queue
     	maxPQ.insert(7);
     	maxPQ.insert(4);
     	maxPQ.insert(10);
     	maxPQ.insert(2);
-    	assertEquals("Testing size in a non-empty maximum priority queue", 4, maxPQ.size());   	
+    	assertEquals("Testing size()", 4, maxPQ.size());   	
     }
     
     /**
@@ -105,13 +104,13 @@ public class MaxPQTest
     	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
     	
     	//Test toString on empty maximum priority queue
-    	assertEquals("Testing toString on an empty maximum priority queue", "<- (Next Out) <- (Last In)\n", maxPQ.toString());
+    	assertEquals("Testing toString()", "<- (Next Out) <- (Last In)\n", maxPQ.toString());
     	
     	//Test toString on non-empty maximum priority queue
     	maxPQ.insert(7);
     	maxPQ.insert(4);
     	maxPQ.insert(10);
     	maxPQ.insert(2);
-    	assertEquals("Testing toString on a non-empty maximum priority queue", "<- (Next Out) 10 4 7 2 <- (Last In)\n", maxPQ.toString()); 
+    	assertEquals("Testing toString()", "<- (Next Out) 10 4 7 2 <- (Last In)\n", maxPQ.toString()); 
     }
 }

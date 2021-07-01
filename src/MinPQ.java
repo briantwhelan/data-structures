@@ -1,33 +1,33 @@
 /*************************************************************************
- *  Minimum Priority Queue class.
+ *  MinPQ class.
  *
- *  @version 1.0 29/3/21
+ *  @version 1/7/21
  *
  *  @author Brian Whelan
  *
  *************************************************************************/
-public class MinPQ<Item extends Comparable<Item>>
+public class MinPQ<T extends Comparable<T>>
 {
-	private Item[] pq;
+	private T[] pq;
 	private int size;
 	
 	/**
-     * Create an empty minimum priority queue with specified capacity
+     * Create an empty MinPQ with specified capacity
      * 
-     * @param capacity: capacity of minimum priority queue
+     * @param capacity: capacity of MinPQ
      */
 	public MinPQ(int capacity)
 	{
-		pq = (Item[]) new Comparable[capacity];
+		pq = (T[]) new Comparable[capacity];
 		size = 0;
 	}
 	
 	/**
-     * Insert an item into the minimum priority queue
+     * Insert an item into the MinPQ
      * 
-     * @param item: item to be added to minimum priority queue
+     * @param item: item to be added to MinPQ
      */
-	public void insert(Item item)
+	public void insert(T item)
 	{
 		size++;
 		pq[size] = item;
@@ -35,13 +35,13 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Delete the minimum item in the minimum priority queue
+     * Delete the minimum item in the MinPQ
      * 
-     * @return the maximum item in the minimum priority queue
+     * @return the maximum item in the MinPQ
      */
-	public Item deleteMin()
+	public T deleteMin()
 	{
-		Item minimumElement = null;
+		T minimumElement = null;
 		if(size > 0)
 		{
 			minimumElement = pq[1];
@@ -54,11 +54,11 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Find whether an item is in the minimum priority queue
+     * Find whether an item is in the MinPQ
      * 
-     * @param item: item to be found in minimum priority queue
+     * @param item: item to be found in MinPQ
      */
-	public boolean contains(Item item)
+	public boolean contains(T item)
 	{
 		boolean itemExists = false;
 		for(int i = 1; i < size && !itemExists; i++)
@@ -73,9 +73,9 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Check whether the minimum priority queue is empty
+     * Check whether the MinPQ is empty
      * 
-     * @return is the minimum priority queue empty?
+     * @return is the MinPQ empty?
      */
 	public boolean isEmpty()
 	{
@@ -83,9 +83,9 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Get the size of the minimum priority queue
+     * Get the size of the MinPQ
      * 
-     * @return the size of the minimum priority queue
+     * @return the size of the MinPQ
      */
 	public int size()
 	{
@@ -93,7 +93,7 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Compare two elements in the minimum priority queue to find if one is greater than the other
+     * Compare two elements in the MinPQ to find if one is greater than the other
      * 
      * @param index1: index of first element
      * @param index2: index of second element
@@ -105,14 +105,14 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Exchange two elements in the minimum priority queue
+     * Exchange two elements in the MinPQ
      * 
      * @param index1: index of first element
      * @param index2: index of second element
      */
 	private void exchange(int index1, int index2)
 	{
-		Item temp = pq[index1];
+		T temp = pq[index1];
 		pq[index1] = pq[index2];
 		pq[index2] = temp;
 	}
@@ -157,9 +157,9 @@ public class MinPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Get String representation of minimum priority queue
+     * Get String representation of MinPQ
      * 
-     * @return String containing information on minimum priority queue
+     * @return String containing information on MinPQ
      */
 	@Override
 	public String toString()

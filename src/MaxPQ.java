@@ -1,33 +1,33 @@
 /*************************************************************************
- *  Maximum Priority Queue class.
+ *  MaxPQ class.
  *
- *  @version 1.0 29/3/21
+ *  @version 1/7/21
  *
  *  @author Brian Whelan
  *
  *************************************************************************/
-public class MaxPQ<Item extends Comparable<Item>>
+public class MaxPQ<T extends Comparable<T>>
 {
-	private Item[] pq;
+	private T[] pq;
 	private int size;
 	
 	/**
-     * Create an empty maximum priority queue with specified capacity
+     * Create an empty MaxPQ with specified capacity
      * 
-     * @param capacity: capacity of maximum priority queue
+     * @param capacity: capacity of MaxPQ
      */
 	public MaxPQ(int capacity)
 	{
-		pq = (Item[]) new Comparable[capacity];
+		pq = (T[]) new Comparable[capacity];
 		size = 0;
 	}
 	
 	/**
-     * Insert an item into the maximum priority queue
+     * Insert an item into the MaxPQ
      * 
-     * @param item: item to be added to maximum priority queue
+     * @param item: item to be added to MaxPQ
      */
-	public void insert(Item item)
+	public void insert(T item)
 	{
 		size++;
 		pq[size] = item;
@@ -35,13 +35,13 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Delete the maximum item in the maximum priority queue
+     * Delete the maximum item in the MaxPQ
      * 
-     * @return the maximum item in the maximum priority queue
+     * @return the maximum item in the MaxPQ
      */
-	public Item deleteMax()
+	public T deleteMax()
 	{
-		Item maximumElement = null;
+		T maximumElement = null;
 		if(size > 0)
 		{
 			maximumElement = pq[1];
@@ -54,9 +54,9 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Check whether the maximum priority queue is empty
+     * Check whether the MaxPQ is empty
      * 
-     * @return is the maximum priority queue empty?
+     * @return is the MaxPQ empty?
      */
 	public boolean isEmpty()
 	{
@@ -64,9 +64,9 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Get the size of the maximum priority queue
+     * Get the size of the MaxPQ
      * 
-     * @return the size of the maximum priority queue
+     * @return the size of the MaxPQ
      */
 	public int size()
 	{
@@ -74,7 +74,7 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Compare two elements in the maximum priority queue to find if one is less than the other
+     * Compare two elements in the MaxPQ to find if one is less than the other
      * 
      * @param index1: index of first element
      * @param index2: index of second element
@@ -86,14 +86,14 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Exchange two elements in the maximum priority queue
+     * Exchange two elements in the MaxPQ
      * 
      * @param index1: index of first element
      * @param index2: index of second element
      */
 	private void exchange(int index1, int index2)
 	{
-		Item temp = pq[index1];
+		T temp = pq[index1];
 		pq[index1] = pq[index2];
 		pq[index2] = temp;
 	}
@@ -138,9 +138,9 @@ public class MaxPQ<Item extends Comparable<Item>>
 	}
 	
 	/**
-     * Get String representation of maximum priority queue
+     * Get String representation of MaxPQ
      * 
-     * @return String containing information on maximum priority queue
+     * @return String containing information on MaxPQ
      */
 	@Override
 	public String toString()

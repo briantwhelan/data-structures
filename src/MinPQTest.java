@@ -2,9 +2,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 /*************************************************************************
- *  Minimum Priority Queue test class.
+ *  MinPQ test class.
  *
- *  @version 1.0 29/3/21
+ *  @version 1/7/21
  *
  *  @author Brian Whelan
  *
@@ -12,7 +12,7 @@ import org.junit.Test;
 public class MinPQTest 
 {    
     /**
-     * Test constructor 
+     * Test MinPQ()
      */
     @Test
     public void testConstructor()
@@ -21,7 +21,7 @@ public class MinPQTest
     }
     
 	/**
-     * Test insert()
+     * Test insert(T item)
      */
     @Test
     public void testInsert()
@@ -30,9 +30,9 @@ public class MinPQTest
     	
     	//Test inserting elements 
     	minPQ.insert(7);
-    	assertEquals("Testing insert", 1, minPQ.size());
+    	assertEquals("Testing insert(T item)", 1, minPQ.size());
     	minPQ.insert(4);
-    	assertEquals("Testing insert", 2, minPQ.size());
+    	assertEquals("Testing insert(T item)", 2, minPQ.size());
     }
     
     /**
@@ -44,36 +44,37 @@ public class MinPQTest
     	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
     	
     	//Test deleting minimum element on empty minimum priority queue
-    	assertEquals("Testing deleteMin on an empty minimum priority queue", null, minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", null, minPQ.deleteMin());
     	
     	//Test deleting minimum element on non-empty minimum priority queue
     	minPQ.insert(7);
     	minPQ.insert(4);
     	minPQ.insert(10);
     	minPQ.insert(2);
-    	assertEquals("Testing deleteMin on a non-empty minimum priority queue", new Integer(2), minPQ.deleteMin());
-    	assertEquals("Testing deleteMin on a non-empty minimum priority queue", new Integer(4), minPQ.deleteMin());
-    	assertEquals("Testing deleteMin on a non-empty minimum priority queue", new Integer(7), minPQ.deleteMin());
-    	assertEquals("Testing deleteMin on a non-empty minimum priority queue", new Integer(10), minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 2, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 4, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 7, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 10, (int)minPQ.deleteMin());
     }
     
     /**
-     * Test contains()
+     * Test contains(T item)
      */
     @Test
     public void testContains()
     {
     	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
+    	
     	minPQ.insert(7);
     	minPQ.insert(4);
     	minPQ.insert(10);
     	minPQ.insert(2);
     	    	
     	//Test contains for an element that does exist in the minimum priority queue
-    	assertEquals("Testing for an element that does exist in the minimum priority queue", true, minPQ.contains(new Integer(4)));
+    	assertEquals("Testing contains(T item)", true, minPQ.contains(4));
     	
     	//Test contains for an element that doesn't exist in the minimum priority queue
-    	assertEquals("Testing for an element that doesn't exist in the minimum priority queue", false, minPQ.contains(new Integer(6)));
+    	assertEquals("Testing contains(T item)", false, minPQ.contains(6));
     }
     
     /**
@@ -85,14 +86,14 @@ public class MinPQTest
     	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
     	
     	//Test isEmpty on empty minimum priority queue
-    	assertEquals("Testing isEmpty on an empty minimum priority queue", true, minPQ.isEmpty());
+    	assertEquals("Testing isEmpty()", true, minPQ.isEmpty());
     	
     	//Test isEmpty on non-empty minimum priority queue
     	minPQ.insert(7);
     	minPQ.insert(4);
     	minPQ.insert(10);
     	minPQ.insert(2);
-    	assertEquals("Testing isEmpty on a non-empty minimum priority queue", false, minPQ.isEmpty());
+    	assertEquals("Testing isEmpty()", false, minPQ.isEmpty());
     }
     
     /**
@@ -104,14 +105,14 @@ public class MinPQTest
     	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
     	
     	//Test getting size in empty minimum priority queue
-    	assertEquals("Testing size in an empty minimum priority queue", 0, minPQ.size());
+    	assertEquals("Testing size()", 0, minPQ.size());
     	
     	//Test getting size in non-empty minimum priority queue
     	minPQ.insert(7);
     	minPQ.insert(4);
     	minPQ.insert(10);
     	minPQ.insert(2);
-    	assertEquals("Testing size in a non-empty minimum priority queue", 4, minPQ.size());   	
+    	assertEquals("Testing size()", 4, minPQ.size());   	
     }
     
     /**
@@ -123,13 +124,13 @@ public class MinPQTest
     	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
     	
     	//Test toString on empty minimum priority queue
-    	assertEquals("Testing toString on an empty minimum priority queue", "<- (Next Out) <- (Last In)\n", minPQ.toString());
+    	assertEquals("Testing toString()", "<- (Next Out) <- (Last In)\n", minPQ.toString());
     	
     	//Test toString on non-empty minimum priority queue
     	minPQ.insert(7);
     	minPQ.insert(4);
     	minPQ.insert(10);
     	minPQ.insert(2);
-    	assertEquals("Testing toString on a non-empty minimum priority queue", "<- (Next Out) 2 4 10 7 <- (Last In)\n", minPQ.toString()); 
+    	assertEquals("Testing toString()", "<- (Next Out) 2 4 10 7 <- (Last In)\n", minPQ.toString()); 
     }
 }
