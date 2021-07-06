@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  ArrayList test class.
  *
- *  @version 11/6/21
+ *  @version 6/7/21
  *
  *  @author Brian Whelan
  *
@@ -52,7 +52,7 @@ public class ArrayListTest
     	arrayList.add(10);
     	assertEquals("Testing size()", 2, arrayList.size());
     	arrayList.add(10);
-    	assertEquals("Testing size()", 3, arrayList.size());
+    	assertEquals("Testing size() - Adding a duplicate element", 3, arrayList.size());
     }
     
     /**
@@ -69,7 +69,7 @@ public class ArrayListTest
     	arrayList.add(10);
     	assertEquals("Testing add(T element)", 2, arrayList.size());
     	arrayList.add(10);
-    	assertEquals("Testing add(T element)", 3, arrayList.size());
+    	assertEquals("Testing add(T element) - Adding a duplicate element", 3, arrayList.size());
     }
     
     /**
@@ -80,8 +80,8 @@ public class ArrayListTest
     {
     	ArrayList<Integer> arrayList = new ArrayList(new Integer[] {5, 10, 15, 20});
     	
-    	assertEquals("Testing remove(int index)", null, arrayList.remove(-1));
-    	assertEquals("Testing remove(int index)", null, arrayList.remove(4));
+    	assertEquals("Testing remove(int index) - Removing invalid index (negative)", null, arrayList.remove(-1));
+    	assertEquals("Testing remove(int index) - Removing invalid index (positive)", null, arrayList.remove(4));
     	assertEquals("Testing remove(int index)", 5, (int)arrayList.remove(0));
     	assertEquals("Testing remove(int index)", 10, (int)arrayList.remove(0));
     	assertEquals("Testing remove(int index)", 15, (int)arrayList.remove(0));   
@@ -96,8 +96,8 @@ public class ArrayListTest
     {
     	ArrayList<Integer> arrayList = new ArrayList(new Integer[] {5, 10, 15});
     	
-    	assertEquals("Testing get(int index)", null, arrayList.get(-1));
-    	assertEquals("Testing get(int index)", null, arrayList.get(3));
+    	assertEquals("Testing get(int index) - Getting invalid index (negative)", null, arrayList.get(-1));
+    	assertEquals("Testing get(int index) - Getting invalid index (positive)", null, arrayList.get(3));
     	assertEquals("Testing get(int index)", 5, (int)arrayList.get(0));
     	assertEquals("Testing get(int index)", 10, (int)arrayList.get(1));
     	assertEquals("Testing get(int index)", 15, (int)arrayList.get(2));

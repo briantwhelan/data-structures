@@ -1,32 +1,31 @@
 /*************************************************************************
  *  ArrayList class.
- *
- *  @version 11/6/21
+ *  
+ *  @version 6/7/21
  *
  *  @author Brian Whelan
  *
  *************************************************************************/
 public class ArrayList<T>
 {
-    private static final int DEFAULT_INITIAL_CAPACITY = 10;
+    private static final int DEFAULT_INITIAL_CAPACITY = 8;
 	
     private T[] arrayList;
     private int size;
 	
     /**
-     * Create an empty ArrayList.
+     * Creates an empty {@code ArrayList}.
      */
     public ArrayList()
     {
-    	arrayList = (T[]) new Object[DEFAULT_INITIAL_CAPACITY];
-    	size = 0;
+    	this(DEFAULT_INITIAL_CAPACITY);
     }
 	
     /**
-     * Create an empty ArrayList with specified capacity.
+     * Creates an empty {@code ArrayList} with the specified initial capacity.
      * 
-     * @param initialCapacity: initial capacity of the ArrayList
-     * @throws IllegalArgumentException if initialCapacity is negative
+     * @param initialCapacity the initial capacity of the {@code ArrayList} that is being created
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
      */
     public ArrayList(int initialCapacity)
     {
@@ -39,10 +38,10 @@ public class ArrayList<T>
     }
 	
     /**
-     * Create an ArrayList from specified array.
+     * Creates an {@code ArrayList} from the specified array.
      * 
-     * @param array: array to convert to an ArrayList
-     * @throws NullPointerException if array is null
+     * @param array the array from which to create the {@code ArrayList}
+     * @throws NullPointerException if {@code array} is {@code null}
      */
     public ArrayList(T[] array) 
     {
@@ -55,9 +54,10 @@ public class ArrayList<T>
     }
 	
     /**
-     * Return the size of the ArrayList (i.e. the number of elements currently in the ArrayList).
+     * Returns the size of the {@code ArrayList}. 
+     * That is, the number of elements currently in the {@code ArrayList}.
      * 
-     * @return size of the ArrayList (i.e. the number of elements currently in the ArrayList)
+     * @return the size of the {@code ArrayList}
      */
     public int size()
     {
@@ -65,29 +65,29 @@ public class ArrayList<T>
     }
 	
     /**
-     * Add an element to the ArrayList.
+     * Adds the specified element to the {@code ArrayList}.
      * 
-     * @param element: element to add to the ArrayList
+     * @param element the element to add to the {@code ArrayList}
      */
     public void add(T element)
     {
-    	//Resize ArrayList if it becomes full
+    	//Resizes ArrayList if it becomes full
     	if(size == arrayList.length)
     	{
     		resize(2 * arrayList.length);
     	}
 		
-    	//Add element to ArrayList
+    	//Adds element to ArrayList
     	arrayList[size] = element;
     	size++;
     }
     
     /**
-     *  Resize array.
+     *  Resizes the array.
      *
-     *  @param newSize: the new size the array is to be resized to
-     *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than size of new array
-     *  @throws NegativeArraySizeException if newSize is negative
+     *  @param newSize the new size the array is to be resized to
+     *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than the size of new array
+     *  @throws NegativeArraySizeException if {@code newSize} is negative
      */
     private void resize(int newSize)
     {
@@ -100,23 +100,23 @@ public class ArrayList<T>
     }
 	
     /**
-     * Remove an element at a specified index from the ArrayList.
+     * Removes the element at the specified index from the {@code ArrayList}.
      * 
-     * @param index: index of element to remove from the ArrayList
-     * @return element that was removed (or null if index is invalid)
+     * @param index the index of the element to remove from the {@code ArrayList}
+     * @return the element that was removed (or null if {@code index} is invalid)
      */
     public T remove(int index)
     {
     	T element = null;
     	if((index >= 0) && (index < size))
     	{
-    		//Remove element from specified index
+    		//Removes element from specified index
     		element = arrayList[index];
     		arrayList[index] = null;
     		shiftElements(index);
     		size--;
     		
-    		//Resize ArrayList if it is only 1/4 full
+    		//Resizes ArrayList if it is only 1/4 full
 	    	if((size > 0) && (size <= arrayList.length/4))
 	    	{
 	    		resize(arrayList.length/2);
@@ -127,10 +127,10 @@ public class ArrayList<T>
     }
 	
     /**
-     * Shift elements in the ArrayList (if necessary) to ensure that elements are together
-     * (i.e. not interleaved with null elements).
+     * Shifts the elements in the {@code ArrayList} (if necessary) to ensure that elements are together
+     * That is, not interleaved with null elements.
      * 
-     * @param indexRemoved: index of element that was previously removed from the ArrayList
+     * @param indexRemoved the index of the element that was previously removed from the {@code ArrayList}
      */
     private void shiftElements(int indexRemoved)
     {
@@ -142,10 +142,10 @@ public class ArrayList<T>
     }
 	
    /**
-    * Get an element at a specified index from the ArrayList.
+    * Gets the element at the specified index from the {@code ArrayList}.
     * 
-    * @param index: index of element to get from the ArrayList
-    * @return element at specified index (or null if index is invalid)
+    * @param index the index of the element to get from the {@code ArrayList}
+    * @return the element at the specified index (or null if {@code index} is invalid)
     */
     public T get(int index)
     {
@@ -159,9 +159,9 @@ public class ArrayList<T>
     }
 	
    /**
-    * Get a string representation of the ArrayList.
+    * Gets the string representation of the {@code ArrayList}.
     * 
-    * @return string representation of the ArrayList
+    * @return the string representation of the {@code ArrayList}
     */
     @Override
     public String toString()
