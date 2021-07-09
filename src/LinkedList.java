@@ -1,7 +1,7 @@
 /*************************************************************************
  *  LinkedList class.
  *
- *  @version 15/6/21
+ *  @version 9/7/21
  *
  *  @author Brian Whelan
  *
@@ -17,9 +17,9 @@ public class LinkedList<T>
     	private Node next;
     	
     	/**
-         * Create a Node with the specified attributes.
-         * @param data: the date to be stored within the Node
-         * @param next: the next Node in the LinkedList
+         * Creates a {@code Node} with the specified attributes.
+         * @param data the data to be stored within the {@code Node}
+         * @param next the next {@code Node} in the {@code LinkedList}
          */
     	public Node(T data, Node next)
     	{
@@ -29,7 +29,7 @@ public class LinkedList<T>
     }
 	
     /**
-     * Create an empty LinkedList.
+     * Creates an empty LinkedList.
      */
     public LinkedList()
     {
@@ -38,9 +38,25 @@ public class LinkedList<T>
     }
     
     /**
-     * Return the size of the LinkedList (i.e. the number of Nodes currently in the LinkedList).
+     * Creates an {@code LinkedList} from the specified array.
      * 
-     * @return size of the LinkedList (i.e. the number of Nodes currently in the LinkedList)
+     * @param array the array from which to create the {@code LinkedList}
+     * @throws NullPointerException if {@code array} is {@code null}
+     */
+    public LinkedList(T[] array) 
+    {
+    	this();
+    	for(int index = 0; index < array.length; index++)
+    	{
+    		this.add(array[index]);
+    	}    	
+    }
+    
+    /**
+     * Returns the size of the {@code LinkedList}. 
+     * That is, the number of {@code Node} elements currently in the {@code LinkedList}.
+     * 
+     * @return the size of the {@code LinkedList}
      */
     public int size()
     {
@@ -48,13 +64,13 @@ public class LinkedList<T>
     }
     
     /**
-     * Add an element to the LinkedList.
+     * Adds the specified element to the {@code LinkedList}.
      *
-     * @param element: the element to add to the LinkedList
+     * @param element the element to add to the {@code LinkedList}
      */
     public void add(T element)
     {
-    	//Create a new Node to insert in LinkedList
+    	//Creates a new Node to insert in the LinkedList
     	Node newNode = new Node(element, null);
     	
     	if(head == null)
@@ -76,10 +92,10 @@ public class LinkedList<T>
     }
     
     /**
-     * Remove the element from the specified index from the LinkedList.
-     *
-     * @param index: the index of the element to remove from the LinkedList
-     * @return the element at the specified index in the LinkedList (or null if index is invalid)
+     * Removes the element at the specified index from the {@code LinkedList}.
+     * 
+     * @param index the index of the element to remove from the {@code LinkedList}
+     * @return the element that was removed (or null if {@code index} is invalid)
      */
     public T remove(int index)
     {
@@ -93,25 +109,24 @@ public class LinkedList<T>
     	else if((index > 0) && (index < size))
     	{
     		Node currentNode = head;
-    		for(int currentIndex = 0; (currentNode.next != null) && (currentIndex < index); 
+    		for(int currentIndex = 0; (currentNode.next != null) && (currentIndex < index - 1); 
     												currentNode = currentNode.next, currentIndex++)
     		{
-    			//Traverse LinkedList to element at index before the element to be removed
+    			//Traverses LinkedList to element at index before the element to be removed
     		}
-    		element = currentNode.data;
-    		currentNode = null;
+    		element = currentNode.next.data;
+    		currentNode.next = currentNode.next.next;
     		size--;
     	}
-    	
     	
     	return element;
     }
     
     /**
-     * Get an element at a specified index from the LinkedList.
+     * Gets the element at the specified index from the {@code LinkedList}.
      * 
-     * @param index: index of element to get from the LinkedList
-     * @return element at specified index (or null if index is invalid)
+     * @param index the index of the element to get from the {@code LinkedList}
+     * @return the element at the specified index (or null if {@code index} is invalid)
      */
      public T get(int index)
      {
@@ -122,7 +137,7 @@ public class LinkedList<T>
      		for(int currentIndex = 0; (currentNode.next != null) && (currentIndex < index); 
      												currentNode = currentNode.next, currentIndex++)
      		{
-     			//Traverse LinkedList to index of element
+     			//Traverses LinkedList to index of element
      		}
      		element = currentNode.data;
      	}
@@ -131,9 +146,9 @@ public class LinkedList<T>
      }
      
      /**
-      * Get a string representation of the LinkedList.
+      * Gets the string representation of the {@code LinkedList}.
       * 
-      * @return string representation of the LinkedList
+      * @return the string representation of the {@code LinkedList}
       */
       @Override
       public String toString()
@@ -150,6 +165,7 @@ public class LinkedList<T>
 	      	string += currentNode.data;
       	}
       	string += " - Tail";
+      	
       	return string;
       }
 }

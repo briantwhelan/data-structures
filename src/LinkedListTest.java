@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  LinkedList test class.
  *
- *  @version 15/6/21
+ *  @version 9/7/21
  *
  *  @author Brian Whelan
  *
@@ -20,6 +20,15 @@ public class LinkedListTest
     }
     
     /**
+     * Test LinkedList(T[] array) 
+     */
+    @Test
+    public void testConstructor2()
+    {  	
+    	new LinkedList(new Integer[] {5, 10, 15});
+    }
+    
+    /**
      * Test size()
      */
     @Test
@@ -33,7 +42,7 @@ public class LinkedListTest
     	linkedList.add(10);
     	assertEquals("Testing size()", 2, linkedList.size());
     	linkedList.add(10);
-    	assertEquals("Testing size()", 3, linkedList.size());
+    	assertEquals("Testing size() - Adding a duplicate element", 3, linkedList.size());
     }
     
     /**
@@ -49,8 +58,8 @@ public class LinkedListTest
     	assertEquals("Testing add(T element)", "Head - 5 - Tail", linkedList.toString());
     	linkedList.add(10);
     	assertEquals("Testing add(T element)", "Head - 5,10 - Tail", linkedList.toString());
-    	linkedList.add(15);
-    	assertEquals("Testing add(T element)", "Head - 5,10,15 - Tail", linkedList.toString());
+    	linkedList.add(10);
+    	assertEquals("Testing add(T element) - Adding a duplicate element", "Head - 5,10,10 - Tail", linkedList.toString());
     }
     
     /**
@@ -59,15 +68,14 @@ public class LinkedListTest
     @Test
     public void testRemove()
     {
-    	LinkedList<Integer> linkedList = new LinkedList();
+    	LinkedList<Integer> linkedList = new LinkedList(new Integer[] {5, 10, 15, 20});
     	
-    	assertEquals("Testing remove(int index)", null, linkedList.remove(0));
-    	linkedList.add(5);
-    	linkedList.add(10);
-    	linkedList.add(15);
-    	assertEquals("Testing remove(int index)", 15, (int)linkedList.remove(2));
+    	assertEquals("Testing remove(int index) - Removing invalid index (negative)", null, linkedList.remove(-1));
+    	assertEquals("Testing remove(int index) - Removing invalid index (positive)", null, linkedList.remove(4));
     	assertEquals("Testing remove(int index)", 5, (int)linkedList.remove(0));
-    	assertEquals("Testing remove(int index)", 10, (int)linkedList.remove(0));
+    	assertEquals("Testing remove(int index)", 15, (int)linkedList.remove(1));
+    	assertEquals("Testing remove(int index)", 10, (int)linkedList.remove(0));   
+    	assertEquals("Testing remove(int index)", 20, (int)linkedList.remove(0)); 
     }
     
     /**
@@ -76,13 +84,10 @@ public class LinkedListTest
     @Test
     public void testGet()
     {
-    	LinkedList<Integer> linkedList = new LinkedList();
+    	LinkedList<Integer> linkedList = new LinkedList(new Integer[] {5, 10, 15});
     	
-    	assertEquals("Testing get(int index)", null, linkedList.get(-1));
-    	assertEquals("Testing get(int index)", null, linkedList.get(3));
-    	linkedList.add(5);
-    	linkedList.add(10);
-    	linkedList.add(15);
+    	assertEquals("Testing get(int index) - Getting invalid index (negative)", null, linkedList.get(-1));
+    	assertEquals("Testing get(int index) - Getting invalid index (positive)", null, linkedList.get(3));
     	assertEquals("Testing get(int index)", 5, (int)linkedList.get(0));
     	assertEquals("Testing get(int index)", 10, (int)linkedList.get(1));
     	assertEquals("Testing get(int index)", 15, (int)linkedList.get(2));
