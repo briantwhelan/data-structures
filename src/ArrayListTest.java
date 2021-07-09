@@ -63,13 +63,13 @@ public class ArrayListTest
     {
     	ArrayList<Integer> arrayList = new ArrayList();
     	
-    	assertEquals("Testing add(T element)", 0, arrayList.size());
+    	assertEquals("Testing add(T element)", "{}", arrayList.toString());
     	arrayList.add(5);
-    	assertEquals("Testing add(T element)", 1, arrayList.size());
+    	assertEquals("Testing add(T element)", "{5}", arrayList.toString());
     	arrayList.add(10);
-    	assertEquals("Testing add(T element)", 2, arrayList.size());
+    	assertEquals("Testing add(T element)", "{5,10}", arrayList.toString());
     	arrayList.add(10);
-    	assertEquals("Testing add(T element) - Adding a duplicate element", 3, arrayList.size());
+    	assertEquals("Testing add(T element) - Adding a duplicate element", "{5,10,10}", arrayList.toString());
     }
     
     /**
@@ -83,8 +83,8 @@ public class ArrayListTest
     	assertEquals("Testing remove(int index) - Removing invalid index (negative)", null, arrayList.remove(-1));
     	assertEquals("Testing remove(int index) - Removing invalid index (positive)", null, arrayList.remove(4));
     	assertEquals("Testing remove(int index)", 5, (int)arrayList.remove(0));
-    	assertEquals("Testing remove(int index)", 10, (int)arrayList.remove(0));
-    	assertEquals("Testing remove(int index)", 15, (int)arrayList.remove(0));   
+    	assertEquals("Testing remove(int index)", 15, (int)arrayList.remove(1));
+    	assertEquals("Testing remove(int index)", 10, (int)arrayList.remove(0));   
     	assertEquals("Testing remove(int index)", 20, (int)arrayList.remove(0)); 
     }
     
