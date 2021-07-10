@@ -1,7 +1,7 @@
 /*************************************************************************
  *  DoublyLinkedList class.
  *
- *  @version 17/6/21
+ *  @version 10/7/21
  *
  *  @author Brian Whelan
  *
@@ -14,13 +14,13 @@ public class DoublyLinkedList<T>
     private class Node
     {
     	private final T data;
-    	private Node next, previous;
+    	private Node previous, next;
     	
     	/**
-         * Create a Node with the specified attributes.
-         * @param data: the date to be stored within the Node
-         * @param previous: the previous Node in the DoublyLinkedList
-         * @param next: the next Node in the DoublyLinkedList
+         * Creates a {@code Node} with the specified attributes.
+         * @param data the data to be stored within the {@code Node}
+         * @param previous the previous {@code Node} in the {@code DoublyLinkedList}
+         * @param next the next Node in the {@code DoublyLinkedList}
          */
     	public Node(T data, Node previous, Node next)
     	{
@@ -31,7 +31,7 @@ public class DoublyLinkedList<T>
     }
 	
     /**
-     * Create an empty DoublyLinkedList.
+     * Create an empty {@code DoublyLinkedList}.
      */
     public DoublyLinkedList()
     {
@@ -41,9 +41,25 @@ public class DoublyLinkedList<T>
     }
     
     /**
-     * Return the size of the DoublyLinkedList (i.e. the number of Nodes currently in the DoublyLinkedList).
+     * Creates an {@code DoublyLinkedList} from the specified array.
      * 
-     * @return size of the DoublyLinkedList (i.e. the number of Nodes currently in the DoublyLinkedList)
+     * @param array the array from which to create the {@code DoublyLinkedList}
+     * @throws NullPointerException if {@code array} is {@code null}
+     */
+    public DoublyLinkedList(T[] array) 
+    {
+    	this();
+    	for(int index = 0; index < array.length; index++)
+    	{
+    		this.add(array[index]);
+    	}    	
+    }
+    
+    /**
+     * Returns the size of the {@code DoublyLinkedList}. 
+     * That is, the number of {@code Node} elements currently in the {@code DoublyLinkedList}.
+     * 
+     * @return the size of the {@code DoublyLinkedList}
      */
     public int size()
     {
@@ -51,9 +67,10 @@ public class DoublyLinkedList<T>
     }
     
     /**
-     * Add an element to the DoublyLinkedList (adds to end/tail of DoublyLinkedList).
+     * Adds the specified element to the {@code DoublyLinkedList}.
+     * The element is added at the {@code tail} of the {@code DoublyLinkedList}. 
      *
-     * @param element: the element to add to the DoublyLinkedList
+     * @param element the element to add to the {@code DoublyLinkedList}
      */
     public void add(T element)
     {
@@ -61,9 +78,9 @@ public class DoublyLinkedList<T>
     }
     
     /**
-     * Add an element at the head of the DoublyLinkedList.
-     *
-     * @param element: the element to add at the head of the DoublyLinkedList
+     * Adds the specified element to the {@code head} of the {@code DoublyLinkedList}.
+     * 
+     * @param element the element to add at the {@code head} of the {@code DoublyLinkedList}
      */
     public void addFirst(T element)
     {
@@ -74,7 +91,7 @@ public class DoublyLinkedList<T>
     		tail = newNode;
     		size++;
     	}
-    	else //if(size >= 1)
+    	else if(size >= 1)
     	{
     		Node newNode = new Node(element, null, head);
     		head.previous = newNode;
@@ -84,9 +101,9 @@ public class DoublyLinkedList<T>
     }
     
     /**
-     * Add an element to the tail of the DoublyLinkedList.
-     *
-     * @param element: the element to add to the tail of the DoublyLinkedList
+     * Adds the specified element to the {@code tail} of the {@code DoublyLinkedList}.
+     * 
+     * @param element the element to add at the {@code tail} of the {@code DoublyLinkedList}
      */
     public void addLast(T element)
     {
@@ -97,7 +114,7 @@ public class DoublyLinkedList<T>
     		tail = newNode;
     		size++;
     	}
-    	else //if(size >= 1)
+    	else if(size >= 1)
     	{
     		Node newNode = new Node(element, tail, null);
     		tail.next = newNode;
@@ -107,10 +124,10 @@ public class DoublyLinkedList<T>
     }
     
     /**
-     * Add an element at a specified index to the DoublyLinkedList.
-     *
-     * @param element: the element to add to the DoublyLinkedList
-     * @param index: the index at which to add the element
+     * Adds the specified element at the specified index of the {@code DoublyLinkedList}.
+     * 
+     * @param element the element to add at the specified {@code index} of the {@code DoublyLinkedList}
+     * @param index the index at which to add the specified {@code element}
      */
     public void add(T element, int index)
     {
@@ -138,12 +155,12 @@ public class DoublyLinkedList<T>
     		size++;
     	}
     }     
-    
+
     /**
-     * Remove the element from the specified index from the DoublyLinkedList.
-     *
-     * @param index: the index of the element to remove from the DoublyLinkedList
-     * @return the element at the specified index in the DoublyLinkedList (or null if index is invalid)
+     * Removes the element at the specified index from the {@code DoublyLinkedList}.
+     * 
+     * @param index the index of the element to remove from the {@code DoublyLinkedList}
+     * @return the element that was removed (or null if {@code index} is invalid)
      */
     public T remove(int index)
     {
@@ -191,16 +208,16 @@ public class DoublyLinkedList<T>
    		      temp.next = null;
    		      size--;
        	  }
-         }
+    	}
   
     	return element;
     }
     
     /**
-     * Get an element at a specified index from the DoublyLinkedList.
+     * Gets the element at the specified index from the {@code DoublyLinkedList}.
      * 
-     * @param index: index of element to get from the DoublyLinkedList
-     * @return element at specified index (or null if index is invalid)
+     * @param index the index of the element to get from the {@code DoublyLinkedList}
+     * @return the element at the specified {@code index} (or null if {@code index} is invalid)
      */
      public T get(int index)
      {
@@ -220,9 +237,9 @@ public class DoublyLinkedList<T>
      }
      
      /**
-      * Get a string representation of the DoublyLinkedList.
+      * Gets the {@code String} representation of the {@code DoublyLinkedList}.
       * 
-      * @return string representation of the DoublyLinkedList
+      * @return the {@code String} representation of the {@code DoublyLinkedList}
       */
       @Override
       public String toString()
