@@ -1,7 +1,7 @@
 /*************************************************************************
  *  Stack class.
  *
- *  @version 11/6/21
+ *  @version 10/7/21
  *
  *  @author Brian Whelan
  *
@@ -14,19 +14,19 @@ public class Stack<T>
     private int size;
 	
     /**
-     * Create an empty Stack.
+     * Creates an empty {@code Stack}.
      */
     public Stack()
     {
     	stack = (T[]) new Object[DEFAULT_INITIAL_CAPACITY];
     	size = 0;
     }
-    
+
     /**
-     * Create an empty Stack with specified capacity.
+     * Creates an empty {@code Stack} with the specified initial capacity.
      * 
-     * @param initialCapacity: initial capacity of the Stack
-     * @throws IllegalArgumentException if initialCapacity is negative
+     * @param initialCapacity the initial capacity of the {@code Stack}
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
      */
     public Stack(int initialCapacity)
     {
@@ -35,9 +35,26 @@ public class Stack<T>
     }
     
     /**
-     * Return the size of the Stack (i.e. the number of elements currently in the Stack).
+     * Creates a {@code Stack} from the specified array.
      * 
-     * @return size of the Stack (i.e. the number of elements currently in the Stack)
+     * @param array the array from which to create the {@code Stack}
+     * @throws NullPointerException if {@code array} is {@code null}
+     */
+    public Stack(T[] array) 
+    {
+    	stack = (T[]) new Object[array.length];
+    	for(int index = array.length - 1; index >= 0; index--)
+    	{
+    		stack[index] = array[index];
+    	}
+    	size = array.length;
+    }
+    
+    /**
+     * Returns the size of the {@code Stack}. 
+     * That is, the number of elements currently on the {@code Stack}.
+     * 
+     * @return the size of the {@code Stack}
      */
     public int size()
     {
@@ -45,29 +62,29 @@ public class Stack<T>
     }
 	
     /**
-     * Push a given element to the Stack.
+     * Pushes the specified element to the {@code Stack}.
      *
-     * @param element: the element to push on to the Stack
+     * @param element the element to push on to the {@code Stack}
      */
     public void push(T element)
     {
-    	//Resize Stack if it becomes full
+    	//Resizes Stack if it becomes full
     	if(size == stack.length)
     	{
     		resize(2 * stack.length);
     	}
 		
-    	//Add element to Stack
+    	//Adds element to Stack
     	stack[size] = element;
     	size++;
     }
     
     /**
-     *  Resize array.
+     *  Resizes array.
      *
-     *  @param newSize: the new size the array is to be resized to
+     *  @param newSize the new size the array is to be resized to
      *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than size of new array
-     *  @throws NegativeArraySizeException if newSize is negative
+     *  @throws NegativeArraySizeException if {@code newSize} is negative
      */
     private void resize(int newSize)
     {
@@ -80,21 +97,21 @@ public class Stack<T>
     }
 	
     /**
-     * Pop the element from the top of the Stack.
+     * Pops the element from the top of the {@code Stack}.
      *
-     * @return the element on the top of the Stack
+     * @return the element on the top of the {@code Stack}
      */
     public T pop()
     {
     	T element = null;
     	if(size > 0)
     	{
-	    	//Remove element from top of Stack
+	    	//Removes element from top of Stack
 	    	size--;
 	    	element = stack[size];
 	    	stack[size] = null;
 	    	
-	    	//Resize Stack if it is only 1/4 full
+	    	//Resizes Stack if it is only 1/4 full
 	    	if((size > 0) && (size == stack.length/4))
 	    	{
 	    		resize(stack.length/2);
@@ -105,9 +122,9 @@ public class Stack<T>
     }
 	
     /**
-     * Peek the element from the top of the Stack (doesn't change top of stack).
+     * Peeks the element on the top of the {@code Stack}.
      *
-     * @return the element on the top of the Stack
+     * @return the element on the top of the {@code Stack}
      */
     public T peek()
     {
@@ -121,9 +138,9 @@ public class Stack<T>
     }
     
     /**
-     * Get a string representation of the Stack.
+     * Gets the {@code String} representation of the {@code Stack}.
      * 
-     * @return string representation of the Stack
+     * @return the {@code String} representation of the {@code Stack}
      */
      @Override
      public String toString()
