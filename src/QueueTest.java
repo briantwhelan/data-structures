@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  Queue test class.
  *
- *  @version 12/6/21
+ *  @version 11/7/21
  *
  *  @author Brian Whelan
  *
@@ -11,31 +11,40 @@ import org.junit.Test;
 public class QueueTest 
 {
     /**
-     * Test Queue() 
+     * Test {@code Queue()} 
      */
     @Test
     public void testConstructor1()
     {  	
-    	new Queue();
+    	new Queue<Integer>();
     }
     
     /**
-     * Test Queue(int initialCapacity) 
+     * Test {@code Queue(int initialCapacity)} 
      */
     @Test
     public void testConstructor2()
     {  	
-    	new Queue(10);
-    	try{new Queue(-1);}catch(Exception e){};
+    	new Queue<Integer>(10);
+    	try{new Queue<Integer>(-1);}catch(Exception e){};
     }
     
     /**
-     * Test size()
+     * Test {@code Queue(T[] array)} 
+     */
+    @Test
+    public void testConstructor3()
+    {  	
+    	new Queue<Integer>(new Integer[] {5, 10, 15});
+    }
+    
+    /**
+     * Test {@code size()}
      */
     @Test
     public void testSize()
     {
-    	Queue<Integer> queue = new Queue();
+    	Queue<Integer> queue = new Queue<Integer>();
     	 
     	assertEquals("Testing size()", 0, queue.size());
     	queue.add(5);
@@ -43,52 +52,49 @@ public class QueueTest
     	queue.add(10);
     	assertEquals("Testing size()", 2, queue.size());
     	queue.add(10);
-    	assertEquals("Testing size()", 3, queue.size());
+    	assertEquals("Testing size() - Adding a duplicate element", 3, queue.size());
     }
     
     /**
-     * Test add(T element)
+     * Test {@code add(T element)}
      */
     @Test
     public void testAdd()
     {
-    	Queue<Integer> queue = new Queue();
+    	Queue<Integer> queue = new Queue<Integer>();
     	 
     	assertEquals("Testing add(T element)", "Head -  - Tail", queue.toString());
     	queue.add(5);
     	assertEquals("Testing add(T element)", "Head - 5 - Tail", queue.toString());
     	queue.add(10);
     	assertEquals("Testing add(T element)", "Head - 5,10 - Tail", queue.toString());
-    	queue.add(15);
-    	assertEquals("Testing add(T element)", "Head - 5,10,15 - Tail", queue.toString());
+    	queue.add(10);
+    	assertEquals("Testing add(T element) - Adding a duplicate element", "Head - 5,10,10 - Tail", queue.toString());
     }
     
     /**
-     * Test remove()
+     * Test {@code remove()}
      */
     @Test
     public void testRemove()
-    {
-    	Queue<Integer> queue = new Queue();
+    {    	
+    	Queue<Integer> stack = new Queue<Integer>(new Integer[] {5, 10, 15});
     	
-    	assertEquals("Testing remove()", null, queue.remove());
-    	queue.add(5);
-    	queue.add(10);
-    	queue.add(15);
-    	assertEquals("Testing remove()", 5, (int)queue.remove());
-    	assertEquals("Testing remove()", 10, (int)queue.remove());
-    	assertEquals("Testing remove()", 15, (int)queue.remove());
+    	assertEquals("Testing pop()", 5, (int)stack.remove());
+    	assertEquals("Testing pop()", 10, (int)stack.remove());
+    	assertEquals("Testing pop()", 15, (int)stack.remove());
+    	assertEquals("Testing pop() - Popping from an empty stack", null, stack.remove());
     }
     
     /**
-     * Test peek()
+     * Test {@code peek()}
      */
     @Test
     public void testPeek()
     {
-    	Queue<Integer> queue = new Queue();
+    	Queue<Integer> queue = new Queue<Integer>();
     	
-    	assertEquals("Testing peek()", null, queue.peek());
+    	assertEquals("Testing peek() - Peeking an empty queue", null, queue.peek());
     	queue.add(5);
     	assertEquals("Testing peek()", 5, (int)queue.peek());
     	queue.add(10);
@@ -98,12 +104,12 @@ public class QueueTest
     }
     
     /**
-     * Test toString()
+     * Test {@code toString()}
      */
     @Test
     public void testToString()
     {
-    	Queue<Integer> queue = new Queue();
+    	Queue<Integer> queue = new Queue<Integer>();
     	
     	assertEquals("Testing toString()", "Head -  - Tail", queue.toString());
     	queue.add(5);
