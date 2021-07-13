@@ -4,7 +4,7 @@ import org.junit.Test;
 /*************************************************************************
  *  MinPQ test class.
  *
- *  @version 1/7/21
+ *  @version 13/7/21
  *
  *  @author Brian Whelan
  *
@@ -12,125 +12,106 @@ import org.junit.Test;
 public class MinPQTest 
 {    
     /**
-     * Test MinPQ()
+     * Test {@code MinPQ()}
      */
     @Test
-    public void testConstructor()
+    public void testConstructor1()
     {  	
-    	new MinPQ(5);
-    }
-    
-	/**
-     * Test insert(T item)
-     */
-    @Test
-    public void testInsert()
-    {
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
-    	
-    	//Test inserting elements 
-    	minPQ.insert(7);
-    	assertEquals("Testing insert(T item)", 1, minPQ.size());
-    	minPQ.insert(4);
-    	assertEquals("Testing insert(T item)", 2, minPQ.size());
+    	new MinPQ<Integer>();
     }
     
     /**
-     * Test deleteMin()
+     * Test {@code MinPQ(int initialCapacity)}
+     */
+    @Test
+    public void testConstructor2()
+    {  	
+    	new MinPQ<Integer>(5);
+    }
+    
+    /**
+     * Test {@code MinPQ(T[] array)} 
+     */
+    @Test
+    public void testConstructor3()
+    {  	
+    	new MinPQ<Integer>(new Integer[] {5, 10, 15});
+    }
+    
+    /**
+     * Test {@code size()}
+     */
+    @Test
+    public void testSize()
+    {    	
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>();
+   	 
+    	assertEquals("Testing size()", 0, minPQ.size());
+    	minPQ.insert(5);
+    	assertEquals("Testing size()", 1, minPQ.size());
+    	minPQ.insert(10);
+    	assertEquals("Testing size()", 2, minPQ.size());
+    	minPQ.insert(10);
+    	assertEquals("Testing size() - Adding a duplicate element", 3, minPQ.size());
+    }
+    
+	/**
+     * Test {@code insert(T element)}
+     */
+    @Test
+    public void testInsert()
+    {    	
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>();
+   	 
+    	assertEquals("Testing insert(T element)", "Head -  - Tail", minPQ.toString());
+    	minPQ.insert(5);
+    	assertEquals("Testing insert(T element)", "Head - 5 - Tail", minPQ.toString());
+    	minPQ.insert(10);
+    	assertEquals("Testing insert(T element)", "Head - 5,10 - Tail", minPQ.toString());
+    	minPQ.insert(10);
+    	assertEquals("Testing insert(T element) - Adding a duplicate element", "Head - 5,10,10 - Tail", minPQ.toString());
+    }
+    
+    /**
+     * Test {@code deleteMin()}
      */
     @Test
     public void testDeleteMin()
     {
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
+    	MinPQ<Integer> stack = new MinPQ<Integer>(new Integer[] {5, 10, 15});
     	
-    	//Test deleting minimum element on empty minimum priority queue
-    	assertEquals("Testing deleteMin()", null, minPQ.deleteMin());
-    	
-    	//Test deleting minimum element on non-empty minimum priority queue
-    	minPQ.insert(7);
-    	minPQ.insert(4);
-    	minPQ.insert(10);
-    	minPQ.insert(2);
-    	assertEquals("Testing deleteMin()", 2, (int)minPQ.deleteMin());
-    	assertEquals("Testing deleteMin()", 4, (int)minPQ.deleteMin());
-    	assertEquals("Testing deleteMin()", 7, (int)minPQ.deleteMin());
-    	assertEquals("Testing deleteMin()", 10, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 5, (int)stack.deleteMin());
+    	assertEquals("Testing deleteMin()", 10, (int)stack.deleteMin());
+    	assertEquals("Testing deleteMin()", 15, (int)stack.deleteMin());
+    	assertEquals("Testing deleteMin() - Deleting from an empty MinPQ", null, stack.deleteMin());
     }
     
     /**
-     * Test contains(T item)
+     * Test {@code contains(T element)}
      */
     @Test
     public void testContains()
     {
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
-    	
-    	minPQ.insert(7);
-    	minPQ.insert(4);
-    	minPQ.insert(10);
-    	minPQ.insert(2);
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>(new Integer[] {5, 10, 15});
     	    	
-    	//Test contains for an element that does exist in the minimum priority queue
-    	assertEquals("Testing contains(T item)", true, minPQ.contains(4));
-    	
-    	//Test contains for an element that doesn't exist in the minimum priority queue
-    	assertEquals("Testing contains(T item)", false, minPQ.contains(6));
+    	assertEquals("Testing contains(T element)", true, minPQ.contains(10));
+    	assertEquals("Testing contains(T element)", false, minPQ.contains(20));
     }
     
     /**
-     * Test isEmpty()
-     */
-    @Test
-    public void testIsEmpty()
-    {
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
-    	
-    	//Test isEmpty on empty minimum priority queue
-    	assertEquals("Testing isEmpty()", true, minPQ.isEmpty());
-    	
-    	//Test isEmpty on non-empty minimum priority queue
-    	minPQ.insert(7);
-    	minPQ.insert(4);
-    	minPQ.insert(10);
-    	minPQ.insert(2);
-    	assertEquals("Testing isEmpty()", false, minPQ.isEmpty());
-    }
-    
-    /**
-     * Test size()
-     */
-    @Test
-    public void testSize()
-    {
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
-    	
-    	//Test getting size in empty minimum priority queue
-    	assertEquals("Testing size()", 0, minPQ.size());
-    	
-    	//Test getting size in non-empty minimum priority queue
-    	minPQ.insert(7);
-    	minPQ.insert(4);
-    	minPQ.insert(10);
-    	minPQ.insert(2);
-    	assertEquals("Testing size()", 4, minPQ.size());   	
-    }
-    
-    /**
-     * Test toString()
+     * Test {@code toString()}
      */
     @Test
     public void testToString()
     {    	
-    	MinPQ<Integer> minPQ = new MinPQ<Integer>(5);
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>();
     	
-    	//Test toString on empty minimum priority queue
-    	assertEquals("Testing toString()", "<- (Next Out) <- (Last In)\n", minPQ.toString());
-    	
-    	//Test toString on non-empty minimum priority queue
-    	minPQ.insert(7);
-    	minPQ.insert(4);
+    	assertEquals("Testing toString()", "Head -  - Tail", minPQ.toString());
+    	minPQ.insert(5);
+    	assertEquals("Testing toString()", "Head - 5 - Tail", minPQ.toString());
+    	minPQ.insert(15);
+    	assertEquals("Testing toString()", "Head - 5,15 - Tail", minPQ.toString());
     	minPQ.insert(10);
-    	minPQ.insert(2);
-    	assertEquals("Testing toString()", "<- (Next Out) 2 4 10 7 <- (Last In)\n", minPQ.toString()); 
+    	assertEquals("Testing toString()", "Head - 5,10,15 - Tail", minPQ.toString());
     }
 }
