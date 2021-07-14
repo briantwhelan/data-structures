@@ -101,9 +101,9 @@ public class MinPQ<T extends Comparable<T>>
 	public boolean contains(T element)
 	{
 		boolean elementExists = false;
-		for(int i = 1; i < size && !elementExists; i++)
+		for(int index = 1; index <= size && !elementExists; index++)
 		{
-			if(minPQ[i].compareTo(element) == 0)
+			if(minPQ[index].compareTo(element) == 0)
 			{
 				elementExists = true;
 			}
@@ -113,7 +113,7 @@ public class MinPQ<T extends Comparable<T>>
 	}
 		
 	/**
-     * Compares two specified elements in the MinPQ to find if one is greater than the other
+     * Compares two specified elements in the {@code MinPQ} to find if one is greater than the other.
      * 
      * @param index1 the index of first element
      * @param index2 the index of second element
@@ -125,7 +125,7 @@ public class MinPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Exchanges two specified elements in the MinPQ
+     * Exchanges two specified elements in the {@code MinPQ}.
      * 
      * @param index1 the index of first element
      * @param index2 the index of second element
@@ -138,7 +138,7 @@ public class MinPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Swims node up the binary heap
+     * Swims node up the binary heap.
      * 
      * @param index the index of the element to swim up the binary heap
      */
@@ -152,7 +152,7 @@ public class MinPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Sinks node down the binary heap
+     * Sinks node down the binary heap.
      * 
      * @param index the index of element to sink down the binary heap
      */
@@ -187,13 +187,6 @@ public class MinPQ<T extends Comparable<T>>
 	@Override
 	public String toString()
 	{
-//		String string = "<- (Next Out) ";
-//		for(int index = 1; index <= size; index++)
-//		{
-//			string += pq[index] + " ";
-//		}
-//		string += "<- (Last In)\n";
-		
 		T[] temp = (T[]) new Comparable[size + 1];
 		int initialSize = size;
 		

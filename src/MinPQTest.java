@@ -78,12 +78,12 @@ public class MinPQTest
     @Test
     public void testDeleteMin()
     {
-    	MinPQ<Integer> stack = new MinPQ<Integer>(new Integer[] {5, 10, 15});
+    	MinPQ<Integer> minPQ = new MinPQ<Integer>(new Integer[] {5, 10, 15});
     	
-    	assertEquals("Testing deleteMin()", 5, (int)stack.deleteMin());
-    	assertEquals("Testing deleteMin()", 10, (int)stack.deleteMin());
-    	assertEquals("Testing deleteMin()", 15, (int)stack.deleteMin());
-    	assertEquals("Testing deleteMin() - Deleting from an empty MinPQ", null, stack.deleteMin());
+    	assertEquals("Testing deleteMin()", 5, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 10, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin()", 15, (int)minPQ.deleteMin());
+    	assertEquals("Testing deleteMin() - Deleting from an empty MinPQ", null, minPQ.deleteMin());
     }
     
     /**

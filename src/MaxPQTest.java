@@ -5,112 +5,114 @@ import org.junit.Test;
 /*************************************************************************
  *  MaxPQ test class.
  *
- *  @version 1/7/21
+ *  @version 14/7/21
  *
  *  @author Brian Whelan
  *
  *************************************************************************/
 public class MaxPQTest 
-{    
-    /**
-     * Test MaxPQ()
+{   
+	/**
+     * Test {@code MinPQ()}
      */
     @Test
-    public void testConstructor()
+    public void testConstructor1()
     {  	
-    	new MaxPQ(5);
+    	new MaxPQ<Integer>();
+    }
+    
+    /**
+     * Test {@code MinPQ(int initialCapacity)}
+     */
+    @Test
+    public void testConstructor2()
+    {  	
+    	new MaxPQ<Integer>(5);
+    }
+    
+    /**
+     * Test {@code MinPQ(T[] array)} 
+     */
+    @Test
+    public void testConstructor3()
+    {  	
+    	new MaxPQ<Integer>(new Integer[] {5, 10, 15});
+    }
+    
+    /**
+     * Test {@code size()}
+     */
+    @Test
+    public void testSize()
+    {    	
+    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>();
+   	 
+    	assertEquals("Testing size()", 0, maxPQ.size());
+    	maxPQ.insert(5);
+    	assertEquals("Testing size()", 1, maxPQ.size());
+    	maxPQ.insert(10);
+    	assertEquals("Testing size()", 2, maxPQ.size());
+    	maxPQ.insert(10);
+    	assertEquals("Testing size() - Adding a duplicate element", 3, maxPQ.size());
     }
     
 	/**
-     * Test insert(T item)
+     * Test {@code insert(T element)}
      */
     @Test
     public void testInsert()
-    {
-    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
-    	
-    	maxPQ.insert(7);
-    	assertEquals("Testing insert(T item)", 1, maxPQ.size());
-    	maxPQ.insert(4);
-    	assertEquals("Testing insert(T item)", 2, maxPQ.size());
+    {    	
+    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>();
+   	 
+    	assertEquals("Testing insert(T element)", "Head -  - Tail", maxPQ.toString());
+    	maxPQ.insert(5);
+    	assertEquals("Testing insert(T element)", "Head - 5 - Tail", maxPQ.toString());
+    	maxPQ.insert(10);
+    	assertEquals("Testing insert(T element)", "Head - 10,5 - Tail", maxPQ.toString());
+    	maxPQ.insert(10);
+    	assertEquals("Testing insert(T element) - Adding a duplicate element", "Head - 10,10,5 - Tail", maxPQ.toString());
     }
     
     /**
-     * Test deleteMax()
+     * Test {@code deleteMax()}
      */
     @Test
     public void testDeleteMax()
     {
-    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
+    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(new Integer[] {5, 10, 15});
     	
-    	//Test deleting maximum element on empty maximum priority queue
-    	assertEquals("Testing deleteMax()", null, maxPQ.deleteMax());
-    	
-    	//Test deleting maximum element on non-empty maximum priority queue
-    	maxPQ.insert(7);
-    	maxPQ.insert(4);
-    	maxPQ.insert(10);
-    	maxPQ.insert(2);
+    	assertEquals("Testing deleteMax()", 15, (int)maxPQ.deleteMax());
     	assertEquals("Testing deleteMax()", 10, (int)maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax()", 7, (int)maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax()", 4, (int)maxPQ.deleteMax());
-    	assertEquals("Testing deleteMax()", 2, (int)maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax()", 5, (int)maxPQ.deleteMax());
+    	assertEquals("Testing deleteMax() - Deleting from an empty MaxPQ", null, maxPQ.deleteMax());
     }
     
     /**
-     * Test isEmpty()
+     * Test {@code contains(T element)}
      */
     @Test
-    public void testIsEmpty()
+    public void testContains()
     {
-    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
-    	
-    	//Test isEmpty on empty maximum priority queue
-    	assertEquals("Testing isEmpty()", true, maxPQ.isEmpty());
-    	
-    	//Test isEmpty on non-empty maximum priority queue
-    	maxPQ.insert(7);
-    	maxPQ.insert(4);
-    	maxPQ.insert(10);
-    	maxPQ.insert(2);
-    	assertEquals("Testing isEmpty()", false, maxPQ.isEmpty());
+    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(new Integer[] {5, 10, 15});
+    	    	
+    	assertEquals("Testing contains(T element)", true, maxPQ.contains(10));
+    	assertEquals("Testing contains(T element)", false, maxPQ.contains(20));
     }
     
     /**
-     * Test size()
-     */
-    @Test
-    public void testSize()
-    {
-    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
-    	
-    	//Test getting size in empty maximum priority queue
-    	assertEquals("Testing size()", 0, maxPQ.size());
-    	
-    	//Test getting size in non-empty maximum priority queue
-    	maxPQ.insert(7);
-    	maxPQ.insert(4);
-    	maxPQ.insert(10);
-    	maxPQ.insert(2);
-    	assertEquals("Testing size()", 4, maxPQ.size());   	
-    }
-    
-    /**
-     * Test toString()
+     * Test {@code toString()}
      */
     @Test
     public void testToString()
     {    	
-    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>(5);
+    	MaxPQ<Integer> maxPQ = new MaxPQ<Integer>();
     	
-    	//Test toString on empty maximum priority queue
-    	assertEquals("Testing toString()", "<- (Next Out) <- (Last In)\n", maxPQ.toString());
-    	
-    	//Test toString on non-empty maximum priority queue
-    	maxPQ.insert(7);
-    	maxPQ.insert(4);
+    	assertEquals("Testing toString()", "Head -  - Tail", maxPQ.toString());
+    	maxPQ.insert(5);
+    	assertEquals("Testing toString()", "Head - 5 - Tail", maxPQ.toString());
+    	maxPQ.insert(15);
+    	assertEquals("Testing toString()", "Head - 15,5 - Tail", maxPQ.toString());
     	maxPQ.insert(10);
-    	maxPQ.insert(2);
-    	assertEquals("Testing toString()", "<- (Next Out) 10 4 7 2 <- (Last In)\n", maxPQ.toString()); 
+    	assertEquals("Testing toString()", "Head - 15,10,5 - Tail", maxPQ.toString());
     }
 }

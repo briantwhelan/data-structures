@@ -1,107 +1,146 @@
 /*************************************************************************
  *  MaxPQ class.
+ *	Adapted from Sedgewick and Wayne.
  *
- *  @version 1/7/21
+ *  @version 14/7/21
  *
  *  @author Brian Whelan
  *
  *************************************************************************/
 public class MaxPQ<T extends Comparable<T>>
 {
-	private T[] pq;
+	private static final int DEFAULT_INITIAL_CAPACITY = 8;
+	
+	private T[] maxPQ;
 	private int size;
-	
+		
 	/**
-     * Create an empty MaxPQ with specified capacity
-     * 
-     * @param capacity: capacity of MaxPQ
+     * Creates an empty {@code MaxPQ}.
      */
-	public MaxPQ(int capacity)
-	{
-		pq = (T[]) new Comparable[capacity];
+    public MaxPQ()
+    {
+    	this(DEFAULT_INITIAL_CAPACITY);
+    }
+	
+    /**
+     * Creates an empty {@code MaxPQ} with the specified initial capacity.
+     * 
+     * @param initialCapacity the initial capacity of the {@code MaxPQ}
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
+     */
+    public MaxPQ(int initialCapacity)
+    {
+    	maxPQ = (T[]) new Comparable[initialCapacity];
 		size = 0;
-	}
+    }
 	
-	/**
-     * Insert an item into the MaxPQ
+    /**
+     * Creates a {@code MaxPQ} from the specified array.
      * 
-     * @param item: item to be added to MaxPQ
+     * @param array the array from which to create the {@code MaxPQ}
+     * @throws NullPointerException if {@code array} is {@code null}
      */
-	public void insert(T item)
+    public MaxPQ(T[] array) 
+    {
+    	this(array.length + 1);
+    	for(int index = 0; index < array.length; index++)
+    	{
+    		this.insert(array[index]);
+    	}
+    }
+    
+    /**
+     * Returns the size of the {@code MaxPQ}. 
+     * That is, the number of elements currently in the {@code MaxPQ}.
+     * 
+     * @return the size of the {@code MaxPQ}
+     */
+	public int size()
+	{
+		return size;
+	}
+
+    /**
+     * Inserts the specified element into the {@code MaxPQ}.
+     * 
+     * @param element the element to insert into the {@code MaxPQ}
+     */
+	public void insert(T element)
 	{
 		size++;
-		pq[size] = item;
+		maxPQ[size] = element;
 		swim(size);
 	}
 	
 	/**
-     * Delete the maximum item in the MaxPQ
-     * 
-     * @return the maximum item in the MaxPQ
+     * Deletes the maximum element from the {@code MaxPQ}.
+     *
+     * @return the maximum element in the {@code MaxPQ}
      */
 	public T deleteMax()
 	{
 		T maximumElement = null;
 		if(size > 0)
 		{
-			maximumElement = pq[1];
+			maximumElement = maxPQ[1];
 			exchange(1, size);
-			pq[size] = null;
+			maxPQ[size] = null;
 			size--;
 			sink(1);
 		}
+		
 		return maximumElement;
 	}
 	
 	/**
-     * Check whether the MaxPQ is empty
-     * 
-     * @return is the MaxPQ empty?
+     * Checks whether a specified element is contained within the {@code MaxPQ}.
+     *
+     * @param element the element to find in the {@code MaxPQ}
+     * @return {@code true} if {@code element} is found and {@code false} otherwise
      */
-	public boolean isEmpty()
+	public boolean contains(T element)
 	{
-		return (size == 0);
+		boolean elementExists = false;
+		for(int index = 1; index <= size && !elementExists; index++)
+		{
+			if(maxPQ[index].compareTo(element) == 0)
+			{
+				elementExists = true;
+			}
+		}
+		
+		return elementExists;
 	}
 	
 	/**
-     * Get the size of the MaxPQ
+     * Compares two specified elements in the {@code MaxPQ} to find if one is less than the other.
      * 
-     * @return the size of the MaxPQ
-     */
-	public int size()
-	{
-		return size;
-	}
-	
-	/**
-     * Compare two elements in the MaxPQ to find if one is less than the other
-     * 
-     * @param index1: index of first element
-     * @param index2: index of second element
-     * @return boolean representing whether first element is less than second element
+     * @param index1 the index of first element
+     * @param index2 the index of second element
+     * @return {@code true} if the element at {@code index1} is less than the element at {@code index2} and {@code false} otherwise
      */
 	private boolean less(int index1, int index2)
 	{
-		return (pq[index1].compareTo(pq[index2]) < 0);
+		return (maxPQ[index1].compareTo(maxPQ[index2]) < 0);
 	}
 	
 	/**
-     * Exchange two elements in the MaxPQ
+     * Exchanges two specified elements in the {@code MaxPQ}.
      * 
-     * @param index1: index of first element
-     * @param index2: index of second element
+     * @param index1 the index of first element
+     * @param index2 the index of second element
      */
 	private void exchange(int index1, int index2)
 	{
-		T temp = pq[index1];
-		pq[index1] = pq[index2];
-		pq[index2] = temp;
+		T temp = maxPQ[index1];
+		maxPQ[index1] = maxPQ[index2];
+		maxPQ[index2] = temp;
 	}
 	
 	/**
-     * Swim node up binary heap
+     * Swims node up the binary heap.
      * 
-     * @param index: index of element to swim up binary heap
+     * @param index the index of the element to swim up the binary heap
      */
 	private void swim(int index)
 	{
@@ -113,13 +152,14 @@ public class MaxPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Sink node down binary heap
+     * Sinks node down the binary heap.
      * 
-     * @param index: index of element to sink down binary heap
+     * @param index the index of element to sink down the binary heap
      */
 	private void sink(int index)
 	{
-		while(2 * index <= size)
+		boolean isSinking = true;
+		while((2 * index <= size) && isSinking)
 		{
 			int j = 2 * index;
 			if((j < size) && less(j, j + 1))
@@ -129,29 +169,40 @@ public class MaxPQ<T extends Comparable<T>>
 			
 			if(!less(index, j))
 			{
-				break;
+				isSinking = false;
 			}
-			
-			exchange(index, j);
-			index = j;
+			else
+			{
+				exchange(index, j);
+				index = j;
+			}
 		}
 	}
 	
 	/**
-     * Get String representation of MaxPQ
+     * Gets the {@code String} representation of the {@code MaxPQ}.
      * 
-     * @return String containing information on MaxPQ
+     * @return the {@code String} representation of the {@code MaxPQ}
      */
 	@Override
 	public String toString()
 	{
-		String string = "<- (Next Out) ";
-		for(int index = 1; index <= size; index++)
-		{
-			string += pq[index] + " ";
-		}
-		string += "<- (Last In)\n";
+		T[] temp = (T[]) new Comparable[size + 1];
+		int initialSize = size;
 		
+		String string = "Head - ";
+     	for(int index = 1; index <= initialSize; index++)
+     	{
+     		temp[index] = this.deleteMax();
+     		string += temp[index] + ((index < initialSize) ? "," : "");
+     	}
+     	string += " - Tail";
+		
+     	for(int index = 1; index <= initialSize; index++)
+     	{
+     		this.insert(temp[index]);
+     	}
+     	
 		return string;
 	}
 }
