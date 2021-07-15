@@ -1,10 +1,9 @@
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 /*************************************************************************
  *  StringBuilder test class.
  *
- *  @version 17/6/21
+ *  @version 16/7/21
  *
  *  @author Brian Whelan
  *
@@ -12,7 +11,7 @@ import org.junit.Test;
 public class StringBuilderTest 
 {
     /**
-     * Test StringBuilder() 
+     * Test {@code StringBuilder()} 
      */
     @Test
     public void testConstructor1()
@@ -21,7 +20,7 @@ public class StringBuilderTest
     }
     
     /**
-     * Test StringBuilder(int initialCapacity) 
+     * Test {@code StringBuilder(int initialCapacity)} 
      */
     @Test
     public void testConstructor2()
@@ -31,7 +30,7 @@ public class StringBuilderTest
     }
     
     /**
-     * Test StringBuilder(String string) 
+     * Test {@code StringBuilder(String string)} 
      */
     @Test
     public void testConstructor3()
@@ -40,7 +39,7 @@ public class StringBuilderTest
     }
     
     /**
-     * Test size()
+     * Test {@code size()}
      */
     @Test
     public void testSize()
@@ -57,32 +56,32 @@ public class StringBuilderTest
     }
     
     /**
-     * Test add(T element)
+     * Test {@code add(T element)}
      */
     @Test
     public void testAdd()
     {
     	StringBuilder stringBuilder = new StringBuilder();
    	 
-    	assertEquals("Testing size()", 0, stringBuilder.size());
+    	assertEquals("Testing add(T element)", "", stringBuilder.toString());
     	stringBuilder.add('T');
-    	assertEquals("Testing size()", 1, stringBuilder.size());
+    	assertEquals("Testing add(T element)", "T", stringBuilder.toString());
     	stringBuilder.add('s');
-    	assertEquals("Testing size()", 2, stringBuilder.size());
+    	assertEquals("Testing add(T element)", "Ts", stringBuilder.toString());
     	stringBuilder.add('t');
-    	assertEquals("Testing size()", 3, stringBuilder.size());
+    	assertEquals("Testing add(T element)", "Tst", stringBuilder.toString());
     }
     
     /**
-     * Test remove(int index)
+     * Test {@code remove(int index)}
      */
     @Test
     public void testRemove()
     {
     	StringBuilder stringBuilder = new StringBuilder("Test");
     	
-    	assertEquals("Testing remove(int index)", '\u0000', stringBuilder.remove(-1));
-    	assertEquals("Testing remove(int index)", '\u0000', stringBuilder.remove(4));
+    	assertEquals("Testing remove(int index) - Removing invalid index (negative)", '\u0000', stringBuilder.remove(-1));
+    	assertEquals("Testing remove(int index) - Removing invalid index (positive)", '\u0000', stringBuilder.remove(4));
     	assertEquals("Testing remove(int index)", 'T', stringBuilder.remove(0));
     	assertEquals("Testing remove(int index)", 'e', stringBuilder.remove(0));
     	assertEquals("Testing remove(int index)", 's', stringBuilder.remove(0));   
@@ -90,22 +89,22 @@ public class StringBuilderTest
     }
     
     /**
-     * Test get(int index)
+     * Test {@code get(int index)}
      */
     @Test
     public void testGet()
     {
     	StringBuilder stringBuilder = new StringBuilder("Tst");
     	
-    	assertEquals("Testing get(int index)", '\u0000', stringBuilder.get(-1));
-    	assertEquals("Testing get(int index)", '\u0000', stringBuilder.get(3));
+    	assertEquals("Testing get(int index) - Getting invalid index (negative)", '\u0000', stringBuilder.get(-1));
+    	assertEquals("Testing get(int index) - Getting invalid index (positive)", '\u0000', stringBuilder.get(3));
     	assertEquals("Testing get(int index)", 'T', stringBuilder.get(0));
     	assertEquals("Testing get(int index)", 's', stringBuilder.get(1));
     	assertEquals("Testing get(int index)", 't', stringBuilder.get(2));
     }
     
     /**
-     * Test toString()
+     * Test {@code toString()}
      */
     @Test
     public void testToString()

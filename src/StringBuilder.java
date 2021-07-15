@@ -1,7 +1,7 @@
 /*************************************************************************
  *  StringBuilder class.
  *
- *  @version 17/6/21
+ *  @version 16/7/21
  *
  *  @author Brian Whelan
  *
@@ -14,7 +14,7 @@ public class StringBuilder
 	private int size;
 	
 	/**
-     * Create an empty StringBuilder.
+     * Creates an empty {@code StringBuilder}.
      */
 	public StringBuilder()
 	{
@@ -23,22 +23,22 @@ public class StringBuilder
 	}
 	
 	/**
-     * Create an empty StringBuilder with specified initial capacity.
+     * Creates an empty {@code StringBuilder} with the specified initial capacity.
      * 
-     * @param initialCapacity: initial capacity of the StringBuilder
-     * @throws IllegalArgumentException if initialCapacity is negative
+     * @param initialCapacity the initial capacity of the {@code StringBuilder}
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
      */
     public StringBuilder(int initialCapacity)
     {
     	stringBuilder = new char[initialCapacity];
     	size = 0;
     }
-    
+
     /**
-     * Create a StringBuilder from the specified String.
+     * Creates a {@code StringBuilder} from the specified {@code String}.
      * 
-     * @param string: string to convert to StringBuilder
-     * @throws NullPointerException if string is null
+     * @param string the {@code String} from which to create the {@code StringBuilder}
+     * @throws NullPointerException if {@code string} is {@code null}
      */
     public StringBuilder(String string) 
     {
@@ -51,9 +51,10 @@ public class StringBuilder
     }
     
     /**
-     * Return the size of the StringBuilder (i.e. the number of characters currently in the StringBuilder).
+     * Returns the size of the {@code StringBuilder}. 
+     * That is, the number of characters in the {@code StringBuilder}.
      * 
-     * @return size of the StringBuilder (i.e. the number of characters currently in the StringBuilder)
+     * @return the size of the {@code StringBuilder}
      */
     public int size()
     {
@@ -61,29 +62,29 @@ public class StringBuilder
     }
 	
     /**
-     * Add a given character to the StringBuilder.
-     *
-     * @param character: the character to add to the StringBuilder
+     * Adds the specified character to the {@code StringBuilder}.
+     * 
+     * @param character the character to add to the {@code StringBuilder}
      */
     public void add(char character)
     {
-    	//Resize StringBuilder if it becomes full
+    	//Resizes StringBuilder if it becomes full
     	if(size == stringBuilder.length)
     	{
     		resize(2 * stringBuilder.length);
     	}
 		
-    	//Add character to StringBuilder
+    	//Adds character to StringBuilder
     	stringBuilder[size] = character;
     	size++;
     }
     
     /**
-     *  Resize array.
+     *  Resizes the array.
      *
-     *  @param newSize: the new size the array is to be resized to
-     *  @throws ArrayIndexOutOfBoundsException if existing array has more characters than size of new array
-     *  @throws NegativeArraySizeException if newSize is negative
+     *  @param newSize the new size the array is to be resized to
+     *  @throws ArrayIndexOutOfBoundsException if existing array has more characters than the size of new array
+     *  @throws NegativeArraySizeException if {@code newSize} is negative
      */
     private void resize(int newSize)
     {
@@ -96,10 +97,10 @@ public class StringBuilder
     }
 	
     /**
-     * Remove the character at the specified index from the StringBuilder.
-     *
-     * @param index: the index of the character to remove from the StringBuilder
-     * @return the character that was removed (or the null character if index is invalid)
+     * Removes the character at the specified index from the {@code StringBuilder}.
+     * 
+     * @param index the index of the character to remove from the {@code StringBuilder}
+     * @return the character that was removed (or the null character if {@code index} is invalid)
      */
     public char remove(int index)
     {
@@ -123,10 +124,10 @@ public class StringBuilder
     }
 	
     /**
-     * Shift elements in the StringBuilder (if necessary) to ensure that characters are together
-     * (i.e. not interleaved with null characters).
+     * Shifts the elements in the {@code StringBuilder} (if necessary) to ensure that characters are together
+     * That is, not interleaved with null characters.
      * 
-     * @param indexRemoved: index of character that was previously removed from the StringBuilder
+     * @param indexRemoved the index of the character that was previously removed from the {@code StringBuilder}
      */
     private void shiftElements(int indexRemoved)
     {
@@ -138,10 +139,10 @@ public class StringBuilder
     }
     
     /**
-     * Get the character at the specified index from the StringBuilder.
+     * Gets the character at the specified index from the {@code StringBuilder}.
      * 
-     * @param index: the index of the character to get from the StringBuilder
-     * @return the character at the specified index (or the null character if index is invalid)
+     * @param index the index of the character to get from the {@code StringBuilder}
+     * @return the character at the specified {@code index} (or the null character if {@code index} is invalid)
      */
      public char get(int index)
      {
@@ -154,11 +155,11 @@ public class StringBuilder
      	return character;
      }
     
-    /**
-     * Get a string representation of the StringBuilder.
-     * 
-     * @return string representation of the StringBuilder
-     */
+     /**
+      * Gets the {@code String} representation of the {@code StringBuilder}.
+      * 
+      * @return the {@code String} representation of the {@code StringBuilder}
+      */
      @Override
      public String toString()
      {
