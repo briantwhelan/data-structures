@@ -93,7 +93,7 @@ public class MaxPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Checks whether a specified element is contained within the {@code MaxPQ}.
+     * Checks whether the specified element is contained within the {@code MaxPQ}.
      *
      * @param element the element to find in the {@code MaxPQ}
      * @return {@code true} if {@code element} is found and {@code false} otherwise

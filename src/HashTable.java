@@ -2,7 +2,7 @@
  *  HashTable class.
  *  Adapted from Sedgewick and Wayne.
  *
- *  @version 1/7/21
+ *  @version 16/7/21
  *
  *  @author Brian Whelan
  *
@@ -16,7 +16,7 @@ public class HashTable<Key, Value>
     private int size;             
     
     /**
-     * Create an empty HashTable.
+     * Creates an empty {@code HashTable}.
      */
     public HashTable()
     {
@@ -24,7 +24,10 @@ public class HashTable<Key, Value>
     }
     
     /**
-     * Create an empty HashTable with specified initial capacity.
+     * Creates an empty {@code HashTable} with the specified initial capacity.
+     * 
+     * @param initialCapacity the initial capacity of the {@code HashTable}
+     * @throws IllegalArgumentException if {@code initialCapacity} is negative
      */
     public HashTable(int initialCapacity)
     {
@@ -34,67 +37,22 @@ public class HashTable<Key, Value>
     }
 
     /**
-     * Return the size of the HashTable (i.e. the number of Key-Value pairs currently in the HashTable).
+     * Returns the size of the {@code HashTable}. 
+     * That is, the number of Key-Value pairs in the {@code HashTable}.
      * 
-     * @return size of the HashTable (i.e. the number of Key-Value pairs currently in the HashTable)
+     * @return the size of the {@code HashTable}
      */
     public int size() 
     { 
     	return size;
     }
-
-    /**
-     * Hash a Key to its appropriate index in the HashTable.
-     * 
-     * @param key: the key to get a hash code for
-     * @return the index of hashed Key
-     */
-    private int hash(Key key)
-    {
-        int hashCode = key.hashCode();
-        hashCode ^= (hashCode >>> 20) ^ (hashCode >>> 12) ^ (hashCode >>> 7) ^ (hashCode >>> 4);
-        hashCode &= keys.length - 1;
-        
-        return hashCode;
-    }
     
     /**
-     *  Get the value associated with a specified Key (if it exists) from the HashTable.
+     *  Puts the specified Key-Value pair into the {@code HashTable}.
+     *  If the {@code Key} already exists, update its {@code Value}.
      *
-     *  @param key: the Key to find in the HashTable
-     *  @return the Value associated with the given Key (or null if no such Key exists).
-     */
-    public Value get(Key key) 
-    { 
-    	Value value = null;
-    	for(int index = hash(key); keys[index] != null; index = (index + 1) % keys.length)
-    	{
-    		if(keys[index].equals(key))
-    		{
-    			value = values[index];
-    		}
-    	}
-    	
-    	return value;
-    }
-
-    /**
-     *  Check whether a specified Key is contained within the HashTable.
-     *
-     *  @param key: the Key to find in the HashTable
-     *  @return true if key is found and false otherwise
-     */
-    public boolean contains(Key key) 
-    {
-        return get(key) != null;
-    }
-    
-    /**
-     *  Put the Key-Value pair into the HashTable.
-     *  (If the Key already exists, update its Value)
-     *
-     *  @param key: the Key to insert/update in the HashTable
-     *  @param value: the Value to be associated to the specified Key
+     *  @param key: the {@code Key} to insert/update in the {@code HashTable}
+     *  @param value: the {@code Value} to be associated with {@code key}
      */
     public void put(Key key, Value value) 
     {
@@ -104,7 +62,7 @@ public class HashTable<Key, Value>
         }
         else
         {
-        	//Double HashTable size if it's 1/2 full
+        	//Doubles HashTable size if it's 1/2 full
         	if(size == keys.length/2)
         	{
         		resize(2 * keys.length);
@@ -129,17 +87,17 @@ public class HashTable<Key, Value>
         	}
         }
     }
-    
+
     /**
-     *  Resize array.
+     *  Resizes the array.
      *
-     *  @param newCapacity: the new capacity the array is to be resized to
-     *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than size of new array
-     *  @throws NegativeArraySizeException if newSize is negative
+     *  @param newSize the new size the array is to be resized to
+     *  @throws ArrayIndexOutOfBoundsException if existing array has more elements than the size of new array
+     *  @throws NegativeArraySizeException if {@code newSize} is negative
      */
-    private void resize(int newCapacity)
+    private void resize(int newSize)
     {
-    	HashTable<Key, Value> temp = new HashTable<Key, Value>(newCapacity);
+    	HashTable<Key, Value> temp = new HashTable<Key, Value>(newSize);
     	for(int index = 0; index < keys.length; index++)
     	{
     		if(keys[index] != null)
@@ -153,30 +111,45 @@ public class HashTable<Key, Value>
     }
 
     /**
-     * Delete the specified Key (if it exists) from the HashTable.
+     * Hashes the specified {@code Key} to its appropriate index in the {@code HashTable}.
+     * 
+     * @param key the {@code Key} to hash to its appropriate index
+     * @return the index which {@code key} was hashed to
+     */
+    private int hash(Key key)
+    {
+        int hashedIndex = key.hashCode();
+        hashedIndex ^= (hashedIndex >>> 20) ^ (hashedIndex >>> 12) ^ (hashedIndex >>> 7) ^ (hashedIndex >>> 4);
+        hashedIndex &= keys.length - 1;
+        
+        return hashedIndex;
+    }
+    
+    /**
+     * Deletes the specified {@code Key} and its associated {@code Value} (if it exists) from the {@code HashTable}.
      *
-     * @param key: the Key to delete from the HashTable
+     * @param key the {@code Key} to delete from the {@code HashTable}
      */
     public void delete(Key key) 
     {
     	if(this.contains(key))
     	{
-	    	//Find index of key
+	    	//Finds index of key
 	    	int indexToDelete = hash(key);
 	    	while(!key.equals(keys[indexToDelete]))
 	    	{
 	    		indexToDelete = (indexToDelete + 1) % keys.length;
 	    	}
 	    	
-	    	//Delete key and associated value
+	    	//Deletes key and associated value
 	    	keys[indexToDelete] = null;
 	    	values[indexToDelete] = null;
 	    	
-	    	//Rehash all keys after deleted key but before next null (i.e. in the same cluster)
+	    	//Rehashes all keys after deleted key but before next null (i.e. in the same cluster)
 	    	int index = (indexToDelete + 1) % keys.length;
 	    	while(keys[index] != null)
 	    	{
-	    		//Delete keys[index] and values[index] and reinsert
+	    		//Deletes keys[index] and values[index] and reinserts
 	    		Key keyToRehash = keys[index];
 	    		Value valueToRehash = values[index];
 	    		keys[index] = null;
@@ -188,7 +161,7 @@ public class HashTable<Key, Value>
 	    	
 	    	size--;
 	    	
-	    	//Resize HashTable if it is only 1/8 full
+	    	//Resizes HashTable if it is only 1/8 full
 	    	if((size > 0) && (size <= keys.length/8))
 	    	{
 	    		resize(keys.length/2);
@@ -197,9 +170,40 @@ public class HashTable<Key, Value>
     }
     
     /**
-     * Get a String representation of the HashTable.
+     * Gets the {@code Value} associated with the specified {@code Key} (if it exists) from the {@code HashTable}.
+     * 
+     * @param key the {@code Key} to find in the {@code HashTable}
+     * @return the {@code Value} associated with {@code key} (or {@code null} if {@code key} does not exist)
+     */
+    public Value get(Key key) 
+    { 
+    	Value value = null;
+    	for(int index = hash(key); keys[index] != null; index = (index + 1) % keys.length)
+    	{
+    		if(keys[index].equals(key))
+    		{
+    			value = values[index];
+    		}
+    	}
+    	
+    	return value;
+    }
+
+    /**
+     * Checks whether the specified {@code Key} is contained within the {@code HashTable}.
      *
-     * @return a String representation of the HashTable
+     * @param key the {@code Key} to find in the {@code HashTable}
+     * @return {@code true} if {@code key} is found and {@code false} otherwise
+     */
+    public boolean contains(Key key) 
+    {
+        return get(key) != null;
+    }
+    
+    /**
+     * Gets the {@code String} representation of the {@code HashTable}.
+     * 
+     * @return the {@code String} representation of the {@code HashTable}
      */
     @Override
     public String toString() 
@@ -209,7 +213,6 @@ public class HashTable<Key, Value>
     	{
     		if(keys[index] != null)
     		{
-    			//string += "\n" + index + "\t" + keys[index] + "\t" + values[index];
     			string += String.format("\n%-5s\t%-5s\t%-5s", index, keys[index], values[index]);
     		}
     	}

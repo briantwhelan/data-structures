@@ -93,7 +93,7 @@ public class MinPQ<T extends Comparable<T>>
 	}
 	
 	/**
-     * Checks whether a specified element is contained within the {@code MinPQ}.
+     * Checks whether the specified element is contained within the {@code MinPQ}.
      *
      * @param element the element to find in the {@code MinPQ}
      * @return {@code true} if {@code element} is found and {@code false} otherwise

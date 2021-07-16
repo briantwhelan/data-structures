@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  HashTable test class.
  *
- *  @version 1/7/21
+ *  @version 16/7/21
  *
  *  @author Brian Whelan
  *
@@ -11,16 +11,25 @@ import org.junit.Test;
 public class HashTableTest
 {	
 	/**
-     * Test HashTable() 
+     * Test {@code HashTable()} 
      */
 	@Test
-	public void testConstructor()
+	public void testConstructor1()
 	{
 		new HashTable<Integer, Integer>();		     
 	}
 	
 	/**
-     * Test size() 
+     * Test {@code HashTable(int initialCapacity)} 
+     */
+	@Test
+	public void testConstructor2()
+	{
+		new HashTable<Integer, Integer>(32);		     
+	}
+	
+	/**
+     * Test {@code size()} 
      */
 	@Test
 	public void testSize()
@@ -35,49 +44,9 @@ public class HashTableTest
 		hashTable.put(10, 10);
 		assertEquals("Testing size()", 3, hashTable.size());	
 	}
-	
+
 	/**
-     * Test get(Key key)  
-     */
-	@Test
-	public void testGet()
-	{
-		HashTable<Integer, Integer> hashTable = new HashTable<Integer, Integer>();
-		
-		assertEquals("Testing get(Key key)", null, hashTable.get(8));
-  		hashTable.put(7, 7);   
-  		hashTable.put(8, 8);  
-  		hashTable.put(3, 3);   
-  		hashTable.put(1, 1);   
-  		hashTable.put(2, 2);   
-  		hashTable.put(6, 6);   
-  		hashTable.put(4, 4);  
-  		hashTable.put(5, 5);   		
-		assertEquals("Testing get(Key key)", null, hashTable.get(9));	
-		assertEquals("Testing get(Key key)", 8, (int)hashTable.get(8));	
-		assertEquals("Testing get(Key key)", 2, (int)hashTable.get(2));	
-	}
-	
-	/**
-     * Test contains(Key key)  
-     */
-	@Test
-	public void testContains()
-	{
-		HashTable<Integer, Integer> hashTable = new HashTable<Integer, Integer>();
-		
-		assertEquals("Testing contains(Key key)", false, hashTable.contains(10));
-		hashTable.put(5, 5);
-		assertEquals("Testing contains(Key key)", false, hashTable.contains(10));	
-		hashTable.put(10, 10);
-		assertEquals("Testing contains(Key key)", true, hashTable.contains(10));	
-		hashTable.put(15, 15);
-		assertEquals("Testing contains(Key key)", true, hashTable.contains(5));	
-	}
-	
-	
-	/**
-     * Test put(Key key, Value value)  
+     * Test {@code put(Key key, Value value)}  
      */
 	@Test
 	public void testPut()
@@ -128,7 +97,7 @@ public class HashTableTest
 	  
 	
 	/**
-     * Test delete(Key key) 
+     * Test {@code delete(Key key)} 
      */
     @Test
     public void testDelete() 
@@ -184,9 +153,48 @@ public class HashTableTest
 									       		 + "\n7    \t7    \t7    ", 
 									       		 hashTable.toString());
     } 
+    
+	/**
+     * Test {@code get(Key key)}  
+     */
+	@Test
+	public void testGet()
+	{
+		HashTable<Integer, Integer> hashTable = new HashTable<Integer, Integer>();
+		
+		assertEquals("Testing get(Key key)", null, hashTable.get(8));
+  		hashTable.put(7, 7);   
+  		hashTable.put(8, 8);  
+  		hashTable.put(3, 3);   
+  		hashTable.put(1, 1);   
+  		hashTable.put(2, 2);   
+  		hashTable.put(6, 6);   
+  		hashTable.put(4, 4);  
+  		hashTable.put(5, 5);   		
+		assertEquals("Testing get(Key key)", null, hashTable.get(9));	
+		assertEquals("Testing get(Key key)", 8, (int)hashTable.get(8));	
+		assertEquals("Testing get(Key key)", 2, (int)hashTable.get(2));	
+	}
+	
+	/**
+     * Test {@code contains(Key key)}  
+     */
+	@Test
+	public void testContains()
+	{
+		HashTable<Integer, Integer> hashTable = new HashTable<Integer, Integer>();
+		
+		assertEquals("Testing contains(Key key)", false, hashTable.contains(10));
+		hashTable.put(5, 5);
+		assertEquals("Testing contains(Key key)", false, hashTable.contains(10));	
+		hashTable.put(10, 10);
+		assertEquals("Testing contains(Key key)", true, hashTable.contains(10));	
+		hashTable.put(15, 15);
+		assertEquals("Testing contains(Key key)", true, hashTable.contains(5));	
+	}
 
   	/**
-     * Test toString() 
+     * Test {@code toString()} 
      */
  	@Test
  	public void testToString() 
