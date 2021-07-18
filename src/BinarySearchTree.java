@@ -2,7 +2,7 @@
  *  BinarySearchTree class.
  *  Adapted from Sedgewick and Wayne.
  *
- *  @version 21/6/21
+ *  @version 18/7/21
  *
  *  @author Brian Whelan
  *
@@ -13,16 +13,20 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
 
     private class Node 
     {
-        private final Key key;          // sorted by key
-        private Value value;         	// associated data
-        private Node left, right;  		// left and right subtrees
-        private int size;             	// number of nodes in subtree
+        private final Key key;       
+        private Value value;      	
+        private Node left, right; 	
+        private int size;
 
         /**
          * Create a Node with the specified attributes.
-         * @param key: the key to be stored within the Node
-         * @param value: the value associated to the specified key
-         * @param size: the size of the tree with its root at this Node
+         
+         */
+        /**
+         * Creates a {@code Node} with the specified attributes.
+         * @param key the {@code Key} to be stored within the {@code Node}
+         * @param value the {@code Value} to be associated with {@code key} 
+         * @param size the size of the {@code BinarySearchTree} with its {@code root} at this {@code Node}
          */
         public Node(Key key, Value value, int size) 
         {
@@ -33,7 +37,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Create an empty BinarySearchTree.
+     * Creates an empty {@code BinarySearchTree}.
      */
     public BinarySearchTree()
     {
@@ -41,9 +45,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     * Return the size of the BinarySearchTree (i.e. the number of Nodes currently in the BinarySearchTree).
+     * Returns the size of the {@code BinarySearchTree}. 
+     * That is, the number of Key-Value pairs/{@code Node} elements in the {@code BinarySearchTree}.
      * 
-     * @return size of the BinarySearchTree (i.e. the number of Nodes currently in the BinarySearchTree)
+     * @return the size of the {@code BinarySearchTree}
      */
     public int size() 
     { 
@@ -51,10 +56,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     * Return the size of the tree rooted at the specified Node.
+     * Returns the size of the {@code BinarySearchTree} rooted at the specified {@code Node}. 
      * 
-     * @param node: the root Node from which to get the tree size
-     * @return size of the BinarySearchTree rooted at the specified Node
+     * @param node the root {@code Node}
+     * @return the size of the {@code BinarySearchTree} rooted at {@code node}
      */
     private int size(Node node) 
     {
@@ -66,57 +71,55 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         
         return size;
     }
-
+    
     /**
-     *  Get the value associated with a specified Key (if it exists) from the BinarySearchTree.
-     *
-     *  @param key: the Key to find in the BinarySearchTree
-     *  @return the Value associated with the given Key (or null if no such Key exists).
+     * Returns the height of the {@code BinarySearchTree} (i.e. the number of links from the root to 
+     * the deepest leaf).
+     * That is, the number of links from {@code root} to the deepest leaf in the {@code BinarySeatchTree}.
+     * 
+     * @return the height of the {@code BinarySearchTree}
      */
-    public Value get(Key key) 
-    { 
-    	return get(root, key);
+    public int height() 
+    {
+      int height = 0;
+      if(root == null)
+      {
+    	  height = -1;
+      }
+      else if(root.size == 1)
+      {
+    	  height = 0;
+      }
+      else
+      {
+    	  height = height(root) - 1;
+      }
+      
+      return height;
     }
 
     /**
-     *  Get the value associated with a specified Key (if it exists) from the tree rooted at the specified Node.
-     *
-     *  @param node: the root Node from which search for the specified Key
-     *  @param key: the Key to find in the tree rooted at the specified Node
-     *  @return the Value associated with the given Key (or null if no such Key exists).
+     * (Recursively) Returns the height of the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * That is, the number of links from the specified {@code Node} to the deepest leaf currently in the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * 
+     * @param node the root {@code Node}
+     * @return the height of the {@code BinarySearchTree} rooted at {@code node}
      */
-    private Value get(Node node, Key key) 
+    private int height(Node node)
     {
-    	Value value = null;
-        if(node != null) 
+    	int height = 0;
+        if(node == null) 
         {
-	        int cmp = key.compareTo(node.key);
-	        if(cmp < 0) 
-	        {
-	        	value = get(node.left, key);
-	        }
-	        else if(cmp > 0)
-	        {
-	        	value = get(node.right, key);
-	        }
-	        else   
-	        {
-	        	value = node.value;
-	        }
+        	height = 0;
+        }
+        else
+        {
+        	int leftSubtreeHeight = height(node.left);
+        	int rightSubtreeHeight = height(node.right);
+        	height = 1 + ((leftSubtreeHeight > rightSubtreeHeight) ? leftSubtreeHeight : rightSubtreeHeight);
         }
         
-        return value;
-    }
-
-    /**
-     *  Check whether a specified Key is contained within the BinarySearchTree.
-     *
-     *  @param key: the Key to find in the BinarySearchTree
-     *  @return true if key is found and false otherwise
-     */
-    public boolean contains(Key key) 
-    {
-        return get(key) != null;
+        return height;
     }
     
     /**
@@ -172,160 +175,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         
         return node;
     }
-
-    /**
-     * Tree height.
-     *
-     * Asymptotic worst-case running time using Theta notation: Theta(N) - my height method will recursively call 
-     * the height method for every node in the tree, hence in every case, the asymptotic running time will be 
-     * Theta(N). The number of times I call the height method will be roughly 2N as the method calls itself 
-     * for both the left and right subtree of each node. However, we can disregard this constant multiple in 
-     * our asymptotic running time.
-     *
-     * @return the number of links from the root to the deepest leaf.
-     *
-     * Example 1: for an empty tree this should return -1.
-     * Example 2: for a tree with only one node it should return 0.
-     * Example 3: for the following tree it should return 2.
-     *   B
-     *  / \
-     * A   C
-     *      \
-     *       D
-     */
     
-    /**
-     * Return the height of the BinarySearchTree (i.e. the number of recursions needed to reach the 
-     * deepest Node currently in the BinarySearchTree).
-     * 
-     * @return the height of the BinarySearchTree (i.e. the number of recursions needed to reach the 
-     * deepest Node currently in the BinarySearchTree)
-     */
-    public int height() 
-    {
-      int height = 0;
-      if(root == null)
-      {
-    	  height = -1;
-      }
-      else if(root.size == 1)
-      {
-    	  height = 0;
-      }
-      else
-      {
-    	  height = height(root) - 1;
-      }
-      
-      return height;
-    }
-
-    /**
-     * (Recursively) Return the height of the the tree rooted at the specified Node (i.e. the 
-     * number of recursions needed to reach the deepest Node currently in the tree rooted at 
-     * the specified Node).
-     * 
-     * @param node: the root Node from which to get the tree height
-     * @return the height of the tree rooted at the specified Node (i.e. the number of recursions 
-     * needed to reach the deepest Node currently in the tree rooted at the specified Node)
-     */
-    private int height(Node node)
-    {
-    	int height = 0;
-        if(node == null) 
-        {
-        	height = 0;
-        }
-        else
-        {
-        	int leftSubtreeHeight = height(node.left);
-        	int rightSubtreeHeight = height(node.right);
-        	height = 1 + ((leftSubtreeHeight > rightSubtreeHeight) ? leftSubtreeHeight : rightSubtreeHeight);
-        }
-        
-        return height;
-    }
-    
-    /**
-     *  Select and return the Key (if it exists) with the specified number of keys smaller than it 
-     *  in the BinarySearchTree.
-     *
-     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the BinarySearchTree
-     *  @return the Key with a specified number of keys smaller than it (or null if such a Key doesn't exist)
-     */
-    public Key select(int numberOfSmallerKeys)
-    {
-    	Key key;
-    	if(numberOfSmallerKeys < 0 || numberOfSmallerKeys >= size()) 
-    	{
-    		key = null;
-    	}
-    	else
-    	{
-    		Node node = select(root, numberOfSmallerKeys);
-    		key = node.key;
-    	}
-    	
-    	return key;
-    }
-    
-    /**
-     *  (Recursively) Select and return the Key (if it exists) with the specified number of keys 
-     *  smaller than it in the tree rooted at the specified Node.
-     *
-     *  @param node: the root Node from which to select desired Key
-     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the tree 
-     *  rooted at the specified Node
-     *  @return the Key with a specified number of keys smaller than it (or null if such a Key 
-     *  doesn't exist)
-     */
-    private Node select(Node node, int numberOfSmallerKeys)
-    {	
-    	Node select;
-    	if(node == null) 
-    	{
-    		select = null;
-    	}
-    	else
-    	{
-    		int t = size(node.left);
-    		if(t > numberOfSmallerKeys)
-    		{
-    			select = select(node.left, numberOfSmallerKeys);
-    		}
-    		else if(t < numberOfSmallerKeys) 
-    		{
-    			select = select(node.right, numberOfSmallerKeys - t - 1);
-    		}
-    		else
-    		{
-    			select = node;
-    		}
-    	}
-    
-    	return select;
-    }
-
-    /**
-     *  Return the median Key in the BinarySearchTree.
-     *
-     *  @return the median Key (or null if the BinarySearchTree is empty)
-     */
-    public Key median() 
-    {
-    	Key median;
-    	if(root == null)
-    	{
-    		median = null;
-    	}
-    	else
-    	{
-    		median = select((root.size + 1)/2 - 1);
-    	}
-    	
-    	return median;
-    }
-
     /**
      * Delete the specified Key (if it exists) from the BinarySearchTree.
      * (Similar to Hibbard deletion but uses predecessor instead of successor)
@@ -464,6 +314,142 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	
     	return max;
     }
+
+    /**
+     *  Get the value associated with a specified Key (if it exists) from the BinarySearchTree.
+     *
+     *  @param key: the Key to find in the BinarySearchTree
+     *  @return the Value associated with the given Key (or null if no such Key exists).
+     */
+    public Value get(Key key) 
+    { 
+    	return get(root, key);
+    }
+
+    /**
+     *  Get the value associated with a specified Key (if it exists) from the tree rooted at the specified Node.
+     *
+     *  @param node - the root Node from which search for the specified Key
+     *  @param key: the Key to find in the tree rooted at the specified Node
+     *  @return the Value associated with the given Key (or null if no such Key exists).
+     */
+    private Value get(Node node, Key key) 
+    {
+    	Value value = null;
+        if(node != null) 
+        {
+	        int cmp = key.compareTo(node.key);
+	        if(cmp < 0) 
+	        {
+	        	value = get(node.left, key);
+	        }
+	        else if(cmp > 0)
+	        {
+	        	value = get(node.right, key);
+	        }
+	        else   
+	        {
+	        	value = node.value;
+	        }
+        }
+        
+        return value;
+    }
+
+    /**
+     *  Check whether a specified Key is contained within the BinarySearchTree.
+     *
+     *  @param key: the Key to find in the BinarySearchTree
+     *  @return true if key is found and false otherwise
+     */
+    public boolean contains(Key key) 
+    {
+        return get(key) != null;
+    }
+    
+   
+    
+    /**
+     *  Select and return the Key (if it exists) with the specified number of keys smaller than it 
+     *  in the BinarySearchTree.
+     *
+     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the BinarySearchTree
+     *  @return the Key with a specified number of keys smaller than it (or null if such a Key doesn't exist)
+     */
+    public Key select(int numberOfSmallerKeys)
+    {
+    	Key key;
+    	if(numberOfSmallerKeys < 0 || numberOfSmallerKeys >= size()) 
+    	{
+    		key = null;
+    	}
+    	else
+    	{
+    		Node node = select(root, numberOfSmallerKeys);
+    		key = node.key;
+    	}
+    	
+    	return key;
+    }
+    
+    /**
+     *  (Recursively) Select and return the Key (if it exists) with the specified number of keys 
+     *  smaller than it in the tree rooted at the specified Node.
+     *
+     *  @param node: the root Node from which to select desired Key
+     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the tree 
+     *  rooted at the specified Node
+     *  @return the Key with a specified number of keys smaller than it (or null if such a Key 
+     *  doesn't exist)
+     */
+    private Node select(Node node, int numberOfSmallerKeys)
+    {	
+    	Node select;
+    	if(node == null) 
+    	{
+    		select = null;
+    	}
+    	else
+    	{
+    		int t = size(node.left);
+    		if(t > numberOfSmallerKeys)
+    		{
+    			select = select(node.left, numberOfSmallerKeys);
+    		}
+    		else if(t < numberOfSmallerKeys) 
+    		{
+    			select = select(node.right, numberOfSmallerKeys - t - 1);
+    		}
+    		else
+    		{
+    			select = node;
+    		}
+    	}
+    
+    	return select;
+    }
+
+    /**
+     *  Return the median Key in the BinarySearchTree.
+     *
+     *  @return the median Key (or null if the BinarySearchTree is empty)
+     */
+    public Key median() 
+    {
+    	Key median;
+    	if(root == null)
+    	{
+    		median = null;
+    	}
+    	else
+    	{
+    		median = select((root.size + 1)/2 - 1);
+    	}
+    	
+    	return median;
+    }
+
+    
 
 
     /**
