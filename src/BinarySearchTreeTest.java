@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  BinarySearchTree test class.
  *
- *  @version 21/6/21
+ *  @version 20/7/21
  *
  *  @author Brian Whelan
  *
@@ -11,7 +11,7 @@ import org.junit.Test;
 public class BinarySearchTreeTest
 {	
 	/**
-     * Test BinarySearchTree() 
+     * Test {@code BinarySearchTree()} 
      */
 	@Test
 	public void testConstructor()
@@ -20,7 +20,7 @@ public class BinarySearchTreeTest
 	}
 	
 	/**
-     * Test size() 
+     * Test {@code size()} 
      */
 	@Test
 	public void testSize()
@@ -37,76 +37,7 @@ public class BinarySearchTreeTest
 	}
 	
 	/**
-     * Test get(Key key)  
-     */
-	@Test
-	public void testGet()
-	{
-		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
-		
-		assertEquals("Testing get(Key key)", null, binarySearchTree.get(8));
-  		binarySearchTree.put(7, 7);   //        _7_
-  		binarySearchTree.put(8, 8);   //      /     \
-  		binarySearchTree.put(3, 3);   //    _3_      8
-  		binarySearchTree.put(1, 1);   //  /     \
-  		binarySearchTree.put(2, 2);   // 1       6
-  		binarySearchTree.put(6, 6);   //  \     /
-  		binarySearchTree.put(4, 4);   //   2   4
-  		binarySearchTree.put(5, 5);   //        \
-  									  //         5
-		assertEquals("Testing get(Key key)", null, binarySearchTree.get(9));	
-		assertEquals("Testing get(Key key)", 8, (int)binarySearchTree.get(8));	
-		assertEquals("Testing get(Key key)", 2, (int)binarySearchTree.get(2));	
-	}
-	
-	/**
-     * Test contains(Key key)  
-     */
-	@Test
-	public void testContains()
-	{
-		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
-		
-		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));
-		binarySearchTree.put(5, 5);
-		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));	
-		binarySearchTree.put(10, 10);
-		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(10));	
-		binarySearchTree.put(15, 15);
-		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(5));	
-	}
-	
-	
-	/**
-     * Test put(Key key, Value value)  
-     */
-	@Test
-	public void testPut()
-	{
-		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
-		
-		assertEquals("Testing put(Key key, Value value)", "()", binarySearchTree.printKeysInOrder());
-  		binarySearchTree.put(7, 7);   //        _7_
-  		binarySearchTree.put(8, 8);   //      /     \
-  		binarySearchTree.put(3, 3);   //    _3_      8
-  		binarySearchTree.put(1, 1);   //  /     \
-  		binarySearchTree.put(2, 2);   // 1       6
-  		binarySearchTree.put(6, 6);   //  \     /
-  		binarySearchTree.put(4, 4);   //   2   4
-  		binarySearchTree.put(5, 5);   //        \
-  									  //         5
-  		assertEquals("Testing put(Key key, Value value)",
-  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
-  		binarySearchTree.put(8, 10);
-  		assertEquals("Testing put(Key key, Value value)",
-  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
-  		binarySearchTree.put(8, null);
-  		assertEquals("\"Testing put(Key key, Value value)\"",
-  				"(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
-	}
-	  
-	/**
-     * Test height()  
+     * Test {@code height()}  
      */
 	@Test
 	public void testHeight()
@@ -133,62 +64,35 @@ public class BinarySearchTreeTest
   	}
 	
 	/**
-     * Test median()  
+     * Test {@code put(Key key, Value value)}  
      */
 	@Test
-	public void testMedian()
-  	{
+	public void testPut()
+	{
 		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
 		
-		assertEquals("Testing median()", null, binarySearchTree.median());
-		binarySearchTree.put(7, 7);
-		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
-		binarySearchTree.put(8, 8); 
-		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
-		binarySearchTree.put(3, 3);  
-		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
-    	binarySearchTree.put(1, 1);      
-    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
-    	binarySearchTree.put(2, 2);      
-    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
-    	binarySearchTree.put(6, 6);      
-    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
-    	binarySearchTree.put(4, 4);      
-    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
-    	binarySearchTree.put(5, 5); 
-    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
-  	}
+		assertEquals("Testing put(Key key, Value value)", "()", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \
+  		binarySearchTree.put(2, 2);   // 1       6
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(8, 10);
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1(()2()))3((()4(()5()))6()))7(()8()))", binarySearchTree.printKeysInOrder());
+  		binarySearchTree.put(8, null);
+  		assertEquals("\"Testing put(Key key, Value value)\"",
+  				"(((()1(()2()))3((()4(()5()))6()))7())", binarySearchTree.printKeysInOrder());
+	}
 	
 	/**
-     * Test select(int numberOfSmallerKeys) 
-     */
-	@Test
-	public void testSelect()
-  	{
-		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
-		
-		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(0));
-		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(-2));		
-		binarySearchTree.put(7, 7);
-		assertEquals("Testing select(int numberOfSmallerKeys)", 7, (int)binarySearchTree.select(0));
-		binarySearchTree.put(8, 8); 
-		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(1));
-		binarySearchTree.put(3, 3);  
-		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(2));
-    	binarySearchTree.put(1, 1);      
-    	assertEquals("Testing select(int numberOfSmallerKeys)", 1, (int)binarySearchTree.select(0));
-    	binarySearchTree.put(2, 2);      
-    	assertEquals("Testing select(int numberOfSmallerKeys)", 2, (int)binarySearchTree.select(1));
-    	binarySearchTree.put(6, 6);      
-    	assertEquals("Testing select(int numberOfSmallerKeys)", 6, (int)binarySearchTree.select(3));
-    	binarySearchTree.put(4, 4);      
-    	assertEquals("Testing select(int numberOfSmallerKeys)", 4, (int)binarySearchTree.select(3));
-    	binarySearchTree.put(5, 5);
-    	assertEquals("Testing select(int numberOfSmallerKeys)", 5, (int)binarySearchTree.select(4));    	
-  	}
-	
-	/**
-     * Test delete(Key key) 
+     * Test {@code delete(Key key)} 
      */
     @Test
     public void testDelete() 
@@ -235,7 +139,7 @@ public class BinarySearchTreeTest
     } 
     
     /**
-     * Test deleteMax() 
+     * Test {@code deleteMax()} 
      */
 	@Test
 	public void testDeleteMax()
@@ -265,7 +169,7 @@ public class BinarySearchTreeTest
 	}
 	
 	/**
-     * Test max() 
+     * Test {@code max()} 
      */
 	@Test
 	public void testMax()
@@ -280,9 +184,104 @@ public class BinarySearchTreeTest
   		binarySearchTree.put(10, 10); 
   		assertEquals("Testing max()", 15, (int)binarySearchTree.max());
 	}
-  
+	
 	/**
-     * Test printKeysInOrder() 
+     * Test {@code get(Key key)}  
+     */
+	@Test
+	public void testGet()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing get(Key key)", null, binarySearchTree.get(8));
+  		binarySearchTree.put(7, 7);   //        _7_
+  		binarySearchTree.put(8, 8);   //      /     \
+  		binarySearchTree.put(3, 3);   //    _3_      8
+  		binarySearchTree.put(1, 1);   //  /     \
+  		binarySearchTree.put(2, 2);   // 1       6
+  		binarySearchTree.put(6, 6);   //  \     /
+  		binarySearchTree.put(4, 4);   //   2   4
+  		binarySearchTree.put(5, 5);   //        \
+  									  //         5
+		assertEquals("Testing get(Key key)", null, binarySearchTree.get(9));	
+		assertEquals("Testing get(Key key)", 8, (int)binarySearchTree.get(8));	
+		assertEquals("Testing get(Key key)", 2, (int)binarySearchTree.get(2));	
+	}
+	
+	/**
+     * Test {@code contains(Key key)}  
+     */
+	@Test
+	public void testContains()
+	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));
+		binarySearchTree.put(5, 5);
+		assertEquals("Testing contains(Key key)", false, binarySearchTree.contains(10));	
+		binarySearchTree.put(10, 10);
+		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(10));	
+		binarySearchTree.put(15, 15);
+		assertEquals("Testing contains(Key key)", true, binarySearchTree.contains(5));	
+	}
+	
+	/**
+     * Test {@code select(int numberOfSmallerKeys)} 
+     */
+	@Test
+	public void testSelect()
+  	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(0));
+		assertEquals("Testing select(int numberOfSmallerKeys)", null, binarySearchTree.select(-2));		
+		binarySearchTree.put(7, 7);
+		assertEquals("Testing select(int numberOfSmallerKeys)", 7, (int)binarySearchTree.select(0));
+		binarySearchTree.put(8, 8); 
+		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(1));
+		binarySearchTree.put(3, 3);  
+		assertEquals("Testing select(int numberOfSmallerKeys)", 8, (int)binarySearchTree.select(2));
+    	binarySearchTree.put(1, 1);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 1, (int)binarySearchTree.select(0));
+    	binarySearchTree.put(2, 2);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 2, (int)binarySearchTree.select(1));
+    	binarySearchTree.put(6, 6);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 6, (int)binarySearchTree.select(3));
+    	binarySearchTree.put(4, 4);      
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 4, (int)binarySearchTree.select(3));
+    	binarySearchTree.put(5, 5);
+    	assertEquals("Testing select(int numberOfSmallerKeys)", 5, (int)binarySearchTree.select(4));    	
+  	}
+
+	/**
+     * Test {@code median()}  
+     */
+	@Test
+	public void testMedian()
+  	{
+		BinarySearchTree<Integer, Integer> binarySearchTree = new BinarySearchTree<Integer, Integer>();
+		
+		assertEquals("Testing median()", null, binarySearchTree.median());
+		binarySearchTree.put(7, 7);
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+		binarySearchTree.put(8, 8); 
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+		binarySearchTree.put(3, 3);  
+		assertEquals("Testing median()", 7, (int)binarySearchTree.median());
+    	binarySearchTree.put(1, 1);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(2, 2);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(6, 6);      
+    	assertEquals("Testing median()", 3, (int)binarySearchTree.median());
+    	binarySearchTree.put(4, 4);      
+    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
+    	binarySearchTree.put(5, 5); 
+    	assertEquals("Testing median()", 4, (int)binarySearchTree.median());
+  	}
+
+	/**
+     * Test {@code printKeysInOrder()} 
      */
   	@Test
   	public void testPrintKeysInOrder() 
@@ -304,7 +303,7 @@ public class BinarySearchTreeTest
   	}
    	
   	/**
-     * Test toString() 
+     * Test {@code toString()} 
      */
  	@Test
  	public void testToString() 

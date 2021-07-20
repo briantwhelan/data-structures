@@ -2,7 +2,7 @@
  *  BinarySearchTree class.
  *  Adapted from Sedgewick and Wayne.
  *
- *  @version 18/7/21
+ *  @version 20/7/21
  *
  *  @author Brian Whelan
  *
@@ -18,10 +18,6 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
         private Node left, right; 	
         private int size;
 
-        /**
-         * Create a Node with the specified attributes.
-         
-         */
         /**
          * Creates a {@code Node} with the specified attributes.
          * @param key the {@code Key} to be stored within the {@code Node}
@@ -46,7 +42,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
 
     /**
      * Returns the size of the {@code BinarySearchTree}. 
-     * That is, the number of Key-Value pairs/{@code Node} elements in the {@code BinarySearchTree}.
+     * That is, the number of {@code Key}-{@code Value} pairs/{@code Node} elements in the {@code BinarySearchTree}.
      * 
      * @return the size of the {@code BinarySearchTree}
      */
@@ -73,8 +69,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Returns the height of the {@code BinarySearchTree} (i.e. the number of links from the root to 
-     * the deepest leaf).
+     * Returns the height of the {@code BinarySearchTree}.
      * That is, the number of links from {@code root} to the deepest leaf in the {@code BinarySeatchTree}.
      * 
      * @return the height of the {@code BinarySearchTree}
@@ -123,11 +118,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     *  Put the Key-Value pair into the BinarySearchTree.
-     *  (If the Key already exists, update its Value)
+     *  Puts the specified {@code Key}-{@code Value} pair into the {@code BinarySearchTree}.
+     *  If the specified {@code Key} already exists, update its {@code Value}.
      *
-     *  @param key: the Key to insert/update in the BinarySearchTree
-     *  @param value: the Value to be associated to the specified Key
+     *  @param key the {@code Key} to insert/update in the {@code BinarySearchTree}
+     *  @param value the {@code Value} to be associated with {@code key}
      */
     public void put(Key key, Value value) 
     {
@@ -142,12 +137,13 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     *  (Recursively) Put the Key-Value pair into the tree rooted at the specified Node.
-     *  (If the Key already exists, update its Value)
+     *  (Recursively) Puts the specified {@code Key}-{@code Value} pair into the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     *  If the specified {@code Key} already exists, update its {@code Value}.
      *
-     *  @param key: the Key to insert/update in the tree rooted at the specified Node
-     *  @param value: the Value to be associated to the specified 
-     *  @return the Node that has been added/updated
+     *  @param node the root {@code Node}
+     *  @param key the {@code Key} to insert/update in the {@code BinarySearchTree} rooted at {@code node}
+     *  @param value the {@code Value} to be associated with {@code key} 
+     *  @return the {@code Node} that has been added/updated
      */
     private Node put(Node node, Key key, Value value) 
     {
@@ -177,10 +173,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Delete the specified Key (if it exists) from the BinarySearchTree.
-     * (Similar to Hibbard deletion but uses predecessor instead of successor)
+     * Deletes the specified {@code Key} (if it exists) from the {@code BinarySearchTree}.
+     * Uses Hibbard deletion to replace deleted {@code Node} with its predecessor.
      *
-     * @param key: the Key to delete from the BinarySearchTree
+     * @param key the {@code Key} to delete from the {@code BinarySearchTree}
      */
     public void delete(Key key) 
     {
@@ -191,12 +187,12 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * (Recursively) Delete the specified Key (if it exists) from the tree rooted at the specified Node.
-     * (Similar to Hibbard deletion but uses predecessor instead of successor)
+     * (Recursively) Deletes the specified {@code Key} (if it exists) from the {@code BinarySearchTree} rooted at the specified {@code Node}.
+     * Uses Hibbard deletion to replace deleted {@code Node} with its predecessor.
      *
-     * @param node: the root Node from which to delete specified Key
-     * @param key: the Key to delete from the the tree rooted at the specified Node
-     * @return the Node that has been updated
+     * @param node the root {@code Node}
+     * @param key the {@code Key} to delete from the {@code BinarySearchTree} rooted at {@code node}
+     * @return the {@code Node} that has been updated
      */
     private Node delete(Node node, Key key)
     { 
@@ -246,7 +242,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Delete the maximum Key (if it exists) from the BinarySearchTree.
+     * Deletes the maximum {@code Key} (if it exists) from the {@code BinarySearchTree}.
      */
     public void deleteMax() 
     {
@@ -257,10 +253,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Delete the maximum Key (if it exists) from the tree rooted at the specified Node.
+     * (Recursively) Deletes the maximum {@code Key} (if it exists) from the {@code BinarySearchTree} rooted at the specified {@code Node}.
      * 
-     * @param node: the root Node from which to delete maximum Key
-     * @return the Node that has been updated
+     * @param node the root {@code Node}
+     * @return the {@code Node} that has been updated
      */
     private Node deleteMax(Node node)
     {
@@ -280,9 +276,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Return the Value associated with the Node with the maximum Key in the BinarySearchTree.
+     * Returns the {@code Value} associated with the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree}.
      * 
-     * @return the Value associated with the Node with the maximum Key in the BinarySearchTree
+     * @return the {@code Value} associated with the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree}
      */
     public Value max() 
     {
@@ -295,10 +291,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * (Recursively) Return the Node with the maximum Key in the tree rooted at the specified Node.
+     * (Recursively) Returns the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree} rooted at the specified {@code Node}.
      * 
-     * @param node: the root Node from which to get the maximum Key
-     * @return the Node with the maximum Key in the tree rooted at the specified Node
+     * @param node: the root {@code Node}
+     * @return the {@code Node} with the maximum {@code Key} in the {@code BinarySearchTree} rooted at {@code node}
      */
     private Node max(Node node)
     {
@@ -316,10 +312,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     *  Get the value associated with a specified Key (if it exists) from the BinarySearchTree.
-     *
-     *  @param key: the Key to find in the BinarySearchTree
-     *  @return the Value associated with the given Key (or null if no such Key exists).
+     * Gets the {@code Value} associated with the specified {@code Key} (if it exists) from the {@code BinarySearchTree}.
+     * 
+     * @param key the {@code Key} to find in the {@code BinarySearchTree}
+     * @return the {@code Value} associated with {@code key} (or {@code null} if {@code key} does not exist)
      */
     public Value get(Key key) 
     { 
@@ -327,11 +323,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     *  Get the value associated with a specified Key (if it exists) from the tree rooted at the specified Node.
+     *  Gets the {@code Value} associated with the specified {@code Key} (if it exists) from the {@code BinarySearchTree} rooted at the specified {@code Node}.
      *
-     *  @param node - the root Node from which search for the specified Key
-     *  @param key: the Key to find in the tree rooted at the specified Node
-     *  @return the Value associated with the given Key (or null if no such Key exists).
+     *  @param node the root Node
+     *  @param key the {@code Key} to find in the {@code BinarySearchTree} rooted at {@code node}
+     *  @return the {@code Value} associated with {@code key} (or {@code null} if {@code key} does not exist)
      */
     private Value get(Node node, Key key) 
     {
@@ -357,24 +353,21 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     *  Check whether a specified Key is contained within the BinarySearchTree.
+     * Checks whether the specified {@code Key} is contained within the {@code BinarySearchTree}.
      *
-     *  @param key: the Key to find in the BinarySearchTree
-     *  @return true if key is found and false otherwise
+     * @param key the {@code Key} to find in the {@code BinarySearchTree}
+     * @return {@code true} if {@code key} is found and {@code false} otherwise
      */
     public boolean contains(Key key) 
     {
         return get(key) != null;
     }
-    
-   
-    
+
     /**
-     *  Select and return the Key (if it exists) with the specified number of keys smaller than it 
-     *  in the BinarySearchTree.
+     * Selects and returns the {@code Key} (if it exists) with the specified number of {@code Key} elements smaller than it in the {@code BinarySearchTree}.
      *
-     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the BinarySearchTree
-     *  @return the Key with a specified number of keys smaller than it (or null if such a Key doesn't exist)
+     * @param numberOfSmallerKeys the number of {@code Key} elements smaller than the desired {@code Key} in the {@code BinarySearchTree}
+     * @return the {@code Key} with {@code numberOfSmallerKeys} {@code Key} elements smaller than it in the {@code BinarySearchTree} (or {@code null} if such a {@code Key} doesn't exist)
      */
     public Key select(int numberOfSmallerKeys)
     {
@@ -393,14 +386,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     *  (Recursively) Select and return the Key (if it exists) with the specified number of keys 
-     *  smaller than it in the tree rooted at the specified Node.
+     * (Recursively) Selects and returns the {@code Key} (if it exists) with the specified number of {@code Key} elements smaller than it in the {@code BinarySearchTree} rooted at the specified {@code Node}.
      *
-     *  @param node: the root Node from which to select desired Key
-     *  @param numberOfSmallerKeys: the number of keys smaller than the desired Key in the tree 
-     *  rooted at the specified Node
-     *  @return the Key with a specified number of keys smaller than it (or null if such a Key 
-     *  doesn't exist)
+     * @param node: the root {@code Node}
+     * @param numberOfSmallerKeys the number of {@code Key} elements smaller than the desired {@code Key} in the {@code BinarySearchTree} rooted at {@code node}
+     * @return the {@code Key} with {@code numberOfSmallerKeys} {@code Key} elements smaller than it in the {@code BinarySearchTree} rooted at {@code node} (or {@code null} if such a {@code Key} doesn't exist)
      */
     private Node select(Node node, int numberOfSmallerKeys)
     {	
@@ -430,9 +420,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
 
     /**
-     *  Return the median Key in the BinarySearchTree.
+     * Returns the median {@code Key} in the {@code BinarySearchTree}.
      *
-     *  @return the median Key (or null if the BinarySearchTree is empty)
+     * @return the median {@code Key} (or {@code null} if the {@code BinarySearchTree} is empty)
      */
     public Key median() 
     {
@@ -449,13 +439,10 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     	return median;
     }
 
-    
-
-
     /**
-     * Return a String containing all keys of the BinarySearchTree in-order with parentheses
-     * (i.e. for each Node, the keys in the left subtree appear before the Key in the Node 
-     * and the keys in the right subtree appear after the Key in the Node).
+     * Returns the {@code String} containing all {@code Key} elements in the {@code BinarySearchTree} in-order with parentheses.
+     * That is, for each {@code Node}, the {@code Key} elements in the left subtree appear before the {@code Key} in the {@code Node} 
+     * and the {@code Key} elements in the right subtree appear after the {@code Key} in the {@code Node}).
      *
      * Example 1: Empty tree -- output: "()"
      * Example 2: Tree containing only "A" -- output: "(()A())"
@@ -468,7 +455,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
      *
      * output: "((()A())B(()C(()D())))"
      *
-     * @return a String containing all keys of the BinarySearchTree in-order with parentheses
+     * @return the {@code String} containing all {@code Key} elements of the {@code BinarySearchTree} in-order with parentheses
      */
     public String printKeysInOrder() 
     {
@@ -486,9 +473,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * (Recursively) Return a String containing all keys of the tree rooted at the specified Node 
-     * in-order with parentheses (i.e. for each Node, the keys in the left subtree appear before 
-     * the Key in the Node and the keys in the right subtree appear after the Key in the Node).
+     * (Recursively) Returns the {@code String} containing all {@code Key} elements in the {@code BinarySearchTree} rooted at the specified {@code Node} in-order with parentheses.
+     * That is, for each {@code Node}, the {@code Key} elements in the left subtree appear before the {@code Key} in the {@code Node} 
+     * and the {@code Key} elements in the right subtree appear after the {@code Key} in the {@code Node}).
      *
      * Example 1: Empty tree -- output: "()"
      * Example 2: Tree containing only "A" -- output: "(()A())"
@@ -501,9 +488,8 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
      *
      * output: "((()A())B(()C(()D())))"
      *
-     * @param node: the root Node from which to get a String containing the keys in-order
-     * @return a String containing all keys of the tree rooted at the specified Node in-order 
-     * with parentheses
+     * @param node the root {@code Node}
+     * @return the {@code String} containing all {@code Key} elements of the {@code BinarySearchTree} rooted at {@code node} in-order with parentheses
      */
     private String printKeysInOrder(Node node)
     {
@@ -521,9 +507,9 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * Get a String representation of the BinarySearchTree.
-     *
-     * @return a String representation of the BinarySearchTree
+     * Gets the {@code String} representation of the {@code BinarySearchTree}.
+     * 
+     * @return the {@code String} representation of the {@code BinarySearchTree}
      */
     @Override
     public String toString() 
@@ -542,11 +528,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value>
     }
     
     /**
-     * (Recursively) Get a String representation of the tree rooted at the specified Node.
+     * (Recursively) Gets the {@code String} representation of the {@code BinarySearchTree} rooted at the specified {@code Node}.
      *
-     * @param node: the root Node from which to get a String representation
-     * @param prefix: the current String representation of the tree rooted at the specified Node 
-     * @return a String representation of the tree rooted at the specified Node
+     * @param node the root {@code Node}
+     * @param prefix the current {@code String} representation of the {@code BinarySearchTree} rooted at {@code node} 
+     * @return the {@code String} representation of the {@code BinarySearchTree} rooted at {@code node}
      */
     private String toString(Node node, String prefix)
     {
