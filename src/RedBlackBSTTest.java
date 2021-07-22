@@ -3,7 +3,7 @@ import org.junit.Test;
 /*************************************************************************
  *  RedBlackBST test class.
  *
- *  @version 29/6/21
+ *  @version 22/7/21
  *
  *  @author Brian Whelan
  *
@@ -11,7 +11,7 @@ import org.junit.Test;
 public class RedBlackBSTTest
 {	
 	/**
-     * Test RedBlackBST() 
+     * Test {@code RedBlackBST()} 
      */
 	@Test
 	public void testConstructor()
@@ -20,7 +20,7 @@ public class RedBlackBSTTest
 	}
 	
 	/**
-     * Test size() 
+     * Test {@code size()} 
      */
 	@Test
 	public void testSize()
@@ -37,75 +37,7 @@ public class RedBlackBSTTest
 	}
 	
 	/**
-     * Test get(Key key)  
-     */
-	@Test
-	public void testGet()
-	{
-		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
-		
-		assertEquals("Testing get(Key key)", null, redBlackBST.get(8));
-  		redBlackBST.put(7, 7);   //        _7_
-  		redBlackBST.put(8, 8);   //      /     \
-  		redBlackBST.put(3, 3);   //    _3_      8
-  		redBlackBST.put(1, 1);   //  /     \
-  		redBlackBST.put(2, 2);   // 1       6
-  		redBlackBST.put(6, 6);   //  \     /
-  		redBlackBST.put(4, 4);   //   2   4
-  		redBlackBST.put(5, 5);   //        \
-  							     //         5
-		assertEquals("Testing get(Key key)", null, redBlackBST.get(9));	
-		assertEquals("Testing get(Key key)", 8, (int)redBlackBST.get(8));	
-		assertEquals("Testing get(Key key)", 2, (int)redBlackBST.get(2));	
-	}
-	
-	/**
-     * Test contains(Key key)  
-     */
-	@Test
-	public void testContains()
-	{
-		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
-		
-		assertEquals("Testing contains(Key key)", false, redBlackBST.contains(10));
-		redBlackBST.put(5, 5);
-		assertEquals("Testing contains(Key key)", false, redBlackBST.contains(10));	
-		redBlackBST.put(10, 10);
-		assertEquals("Testing contains(Key key)", true, redBlackBST.contains(10));	
-		redBlackBST.put(15, 15);
-		assertEquals("Testing contains(Key key)", true, redBlackBST.contains(5));	
-	}
-	
-	/**
-     * Test put(Key key, Value value)  
-     */
-	@Test
-	public void testPut()
-	{
-		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
-		
-		assertEquals("Testing put(Key key, Value value)", "()", redBlackBST.printKeysInOrder());
-  		redBlackBST.put(7, 7);   
-  		redBlackBST.put(8, 8);   
-  		redBlackBST.put(3, 3);   
-  		redBlackBST.put(1, 1);   
-  		redBlackBST.put(2, 2);   
-  		redBlackBST.put(6, 6);   
-  		redBlackBST.put(4, 4);   
-  		redBlackBST.put(5, 5);   
-  							     
-  		assertEquals("Testing put(Key key, Value value)",
-  				"(((()1())2(()3()))4(((()5())6())7(()8())))", redBlackBST.printKeysInOrder());
-  		redBlackBST.put(8, 10);
-  		assertEquals("Testing put(Key key, Value value)",
-  				"(((()1())2(()3()))4(((()5())6())7(()8())))", redBlackBST.printKeysInOrder());
-  		//redBlackBST.put(8, null);
-  		//assertEquals("Testing put(Key key, Value value)",
-  				//"(((()1())2(()3()))4(((()5())6())7()))", redBlackBST.printKeysInOrder());
-	}
-	  
-	/**
-     * Test height()  
+     * Test {@code height()}  
      */
 	@Test
 	public void testHeight()
@@ -132,34 +64,92 @@ public class RedBlackBSTTest
   	}
 	
 	/**
-     * Test median()  
+     * Test {@code put(Key key, Value value)}  
      */
 	@Test
-	public void testMedian()
-  	{
+	public void testPut()
+	{
 		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
 		
-		assertEquals("Testing median()", null, redBlackBST.median());
-		redBlackBST.put(7, 7);
-		assertEquals("Testing median()", 7, (int)redBlackBST.median());
-		redBlackBST.put(8, 8); 
-		assertEquals("Testing median()", 7, (int)redBlackBST.median());
-		redBlackBST.put(3, 3);  
-		assertEquals("Testing median()", 7, (int)redBlackBST.median());
-    	redBlackBST.put(1, 1);      
-    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
-    	redBlackBST.put(2, 2);      
-    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
-    	redBlackBST.put(6, 6);      
-    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
-    	redBlackBST.put(4, 4);      
-    	assertEquals("Testing median()", 4, (int)redBlackBST.median());
-    	redBlackBST.put(5, 5); 
-    	assertEquals("Testing median()", 4, (int)redBlackBST.median());
-  	}
+		assertEquals("Testing put(Key key, Value value)", "()", redBlackBST.printKeysInOrder());
+  		redBlackBST.put(7, 7);   
+  		redBlackBST.put(8, 8);   
+  		redBlackBST.put(3, 3);   
+  		redBlackBST.put(1, 1);   
+  		redBlackBST.put(2, 2);   
+  		redBlackBST.put(6, 6);   
+  		redBlackBST.put(4, 4);   
+  		redBlackBST.put(5, 5);   
+  							     
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1())2(()3()))4(((()5())6())7(()8())))", redBlackBST.printKeysInOrder());
+  		redBlackBST.put(8, 10);
+  		assertEquals("Testing put(Key key, Value value)",
+  				"(((()1())2(()3()))4(((()5())6())7(()8())))", redBlackBST.printKeysInOrder());
+  		//redBlackBST.put(8, null);
+  		//assertEquals("Testing put(Key key, Value value)",
+  				//"(((()1())2(()3()))4(((()5())6())7()))", redBlackBST.printKeysInOrder());
+	}
 	
 	/**
-     * Test select(int numberOfSmallerKeys) 
+     * Test {@code max()} 
+     */
+	@Test
+	public void testMax()
+	{
+		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
+		
+		assertEquals("Testing max()", null, redBlackBST.max());
+  		redBlackBST.put(5, 5); 
+  		assertEquals("Testing max()", 5, (int)redBlackBST.max());
+  		redBlackBST.put(15, 15);
+  		assertEquals("Testing max()", 15, (int)redBlackBST.max());
+  		redBlackBST.put(10, 10); 
+  		assertEquals("Testing max()", 15, (int)redBlackBST.max());
+	}
+	
+	/**
+     * Test {@code get(Key key)}  
+     */
+	@Test
+	public void testGet()
+	{
+		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
+		
+		assertEquals("Testing get(Key key)", null, redBlackBST.get(8));
+  		redBlackBST.put(7, 7);   //        _7_
+  		redBlackBST.put(8, 8);   //      /     \
+  		redBlackBST.put(3, 3);   //    _3_      8
+  		redBlackBST.put(1, 1);   //  /     \
+  		redBlackBST.put(2, 2);   // 1       6
+  		redBlackBST.put(6, 6);   //  \     /
+  		redBlackBST.put(4, 4);   //   2   4
+  		redBlackBST.put(5, 5);   //        \
+  							     //         5
+		assertEquals("Testing get(Key key)", null, redBlackBST.get(9));	
+		assertEquals("Testing get(Key key)", 8, (int)redBlackBST.get(8));	
+		assertEquals("Testing get(Key key)", 2, (int)redBlackBST.get(2));	
+	}
+	
+	/**
+     * Test {@code contains(Key key)}  
+     */
+	@Test
+	public void testContains()
+	{
+		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
+		
+		assertEquals("Testing contains(Key key)", false, redBlackBST.contains(10));
+		redBlackBST.put(5, 5);
+		assertEquals("Testing contains(Key key)", false, redBlackBST.contains(10));	
+		redBlackBST.put(10, 10);
+		assertEquals("Testing contains(Key key)", true, redBlackBST.contains(10));	
+		redBlackBST.put(15, 15);
+		assertEquals("Testing contains(Key key)", true, redBlackBST.contains(5));	
+	}
+	
+	/**
+     * Test {@code select(int numberOfSmallerKeys)} 
      */
 	@Test
 	public void testSelect()
@@ -187,24 +177,34 @@ public class RedBlackBSTTest
   	}
 	
 	/**
-     * Test max() 
+     * Test {@code median()}  
      */
 	@Test
-	public void testMax()
-	{
+	public void testMedian()
+  	{
 		RedBlackBST<Integer, Integer> redBlackBST = new RedBlackBST<Integer, Integer>();
 		
-		assertEquals("Testing max()", null, redBlackBST.max());
-  		redBlackBST.put(5, 5); 
-  		assertEquals("Testing max()", 5, (int)redBlackBST.max());
-  		redBlackBST.put(15, 15);
-  		assertEquals("Testing max()", 15, (int)redBlackBST.max());
-  		redBlackBST.put(10, 10); 
-  		assertEquals("Testing max()", 15, (int)redBlackBST.max());
-	}
-  
+		assertEquals("Testing median()", null, redBlackBST.median());
+		redBlackBST.put(7, 7);
+		assertEquals("Testing median()", 7, (int)redBlackBST.median());
+		redBlackBST.put(8, 8); 
+		assertEquals("Testing median()", 7, (int)redBlackBST.median());
+		redBlackBST.put(3, 3);  
+		assertEquals("Testing median()", 7, (int)redBlackBST.median());
+    	redBlackBST.put(1, 1);      
+    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
+    	redBlackBST.put(2, 2);      
+    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
+    	redBlackBST.put(6, 6);      
+    	assertEquals("Testing median()", 3, (int)redBlackBST.median());
+    	redBlackBST.put(4, 4);      
+    	assertEquals("Testing median()", 4, (int)redBlackBST.median());
+    	redBlackBST.put(5, 5); 
+    	assertEquals("Testing median()", 4, (int)redBlackBST.median());
+  	}
+
 	/**
-     * Test printKeysInOrder() 
+     * Test {@code printKeysInOrder()} 
      */
   	@Test
   	public void testPrintKeysInOrder() 
@@ -225,7 +225,7 @@ public class RedBlackBSTTest
   	}
    	
   	/**
-     * Test toString() 
+     * Test {@code toString()} 
      */
  	@Test
  	public void testToString() 
@@ -260,6 +260,5 @@ public class RedBlackBSTTest
           "     |-null\n" +
           "      -null\n";
          assertEquals("Testing toString()", expectedString, redBlackBST.toString());
-     }
-	
+ 	}
 }
