@@ -31,8 +31,8 @@ public class ArrayList<T>
     {
     	if(initialCapacity > 0)
     	{
-    		arrayList = (T[]) new Object[initialCapacity];
-    		size = 0;
+    	    arrayList = (T[]) new Object[initialCapacity];
+    	    size = 0;
     	}
     	else throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
     }
@@ -48,7 +48,7 @@ public class ArrayList<T>
     	arrayList = (T[]) new Object[array.length];
     	for(int index = 0; index < array.length; index++)
     	{
-    		arrayList[index] = array[index];
+    	    arrayList[index] = array[index];
     	}
     	size = array.length;
     }
@@ -74,7 +74,7 @@ public class ArrayList<T>
     	//Doubles ArrayList size if it becomes full
     	if(size == arrayList.length)
     	{
-    		resize(2 * arrayList.length);
+    	    resize(2 * arrayList.length);
     	}
 		
     	//Adds element to ArrayList
@@ -94,7 +94,7 @@ public class ArrayList<T>
     	T[] temp = (T[]) new Object[newSize];
     	for(int i = 0; i < size; i++)
     	{
-    		temp[i] = arrayList[i];
+    	    temp[i] = arrayList[i];
     	}
     	arrayList = temp;
     }
@@ -110,16 +110,16 @@ public class ArrayList<T>
     	T element = null;
     	if((index >= 0) && (index < size))
     	{
-    		//Removes element from specified index
+    	    //Removes element from specified index
     		element = arrayList[index];
     		arrayList[index] = null;
     		shiftElements(index);
     		size--;
     		
     		//Halves ArrayList size if it is only 1/4 full
-	    	if((size > 0) && (size <= arrayList.length/4))
-	    	{
-	    		resize(arrayList.length/2);
+    		if((size > 0) && (size <= arrayList.length/4))
+    		{
+	    	    resize(arrayList.length/2);
 	    	}
     	}
 		
