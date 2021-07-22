@@ -111,16 +111,16 @@ public class ArrayList<T>
     	if((index >= 0) && (index < size))
     	{
     	    //Removes element from specified index
-    		element = arrayList[index];
-    		arrayList[index] = null;
-    		shiftElements(index);
-    		size--;
+    	    element = arrayList[index];
+    	    arrayList[index] = null;
+    	    shiftElements(index);
+    	    size--;
     		
-    		//Halves ArrayList size if it is only 1/4 full
-    		if((size > 0) && (size <= arrayList.length/4))
-    		{
+    	    //Halves ArrayList size if it is only 1/4 full
+    	    if((size > 0) && (size <= arrayList.length/4))
+    	    {
 	    	    resize(arrayList.length/2);
-	    	}
+	        }
     	}
 		
     	return element;
@@ -136,8 +136,8 @@ public class ArrayList<T>
     {
     	for(int index = indexRemoved; index < size - 1; index++) 
     	{
-    		arrayList[index] = arrayList[index + 1];
-    		arrayList[index + 1] = null;
+    	    arrayList[index] = arrayList[index + 1];
+    	    arrayList[index + 1] = null;
     	}
     }
 	
@@ -152,7 +152,7 @@ public class ArrayList<T>
     	T element = null;
     	if((index >= 0) && (index < size))
     	{
-    		element = arrayList[index];
+    	    element = arrayList[index];
     	}
 		
     	return element;
