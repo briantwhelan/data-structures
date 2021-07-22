@@ -1,7 +1,7 @@
 /*************************************************************************
- *  ArrayList class.
+ *  {@code ArrayList} class.
  *  
- *  @version 6/7/21
+ *  @version 22/7/21
  *
  *  @author Brian Whelan
  *
@@ -71,7 +71,7 @@ public class ArrayList<T>
      */
     public void add(T element)
     {
-    	//Resizes ArrayList if it becomes full
+    	//Doubles ArrayList size if it becomes full
     	if(size == arrayList.length)
     	{
     		resize(2 * arrayList.length);
@@ -103,7 +103,7 @@ public class ArrayList<T>
      * Removes the element at the specified index from the {@code ArrayList}.
      * 
      * @param index the index of the element to remove from the {@code ArrayList}
-     * @return the element that was removed (or null if {@code index} is invalid)
+     * @return the element that was removed (or {@code null} if {@code index} is invalid)
      */
     public T remove(int index)
     {
@@ -116,7 +116,7 @@ public class ArrayList<T>
     		shiftElements(index);
     		size--;
     		
-    		//Resizes ArrayList if it is only 1/4 full
+    		//Halves ArrayList size if it is only 1/4 full
 	    	if((size > 0) && (size <= arrayList.length/4))
 	    	{
 	    		resize(arrayList.length/2);
@@ -128,7 +128,7 @@ public class ArrayList<T>
 	
     /**
      * Shifts the elements in the {@code ArrayList} (if necessary) to ensure that elements are together
-     * That is, not interleaved with null elements.
+     * That is, not interleaved with {@code null} elements.
      * 
      * @param indexRemoved the index of the element that was previously removed from the {@code ArrayList}
      */
@@ -145,7 +145,7 @@ public class ArrayList<T>
     * Gets the element at the specified index from the {@code ArrayList}.
     * 
     * @param index the index of the element to get from the {@code ArrayList}
-    * @return the element at the specified index (or null if {@code index} is invalid)
+    * @return the element at the specified {@code index} (or {@code null} if {@code index} is invalid)
     */
     public T get(int index)
     {
@@ -159,9 +159,9 @@ public class ArrayList<T>
     }
 	
    /**
-    * Gets the string representation of the {@code ArrayList}.
+    * Gets the {@code String} representation of the {@code ArrayList}.
     * 
-    * @return the string representation of the {@code ArrayList}
+    * @return the {@code String} representation of the {@code ArrayList}
     */
     @Override
     public String toString()
@@ -169,7 +169,7 @@ public class ArrayList<T>
     	String string = "{";
     	for(int index = 0; index < size; index++)
     	{
-    		string += arrayList[index] + ((index < size - 1) ? "," : "");
+    	    string += arrayList[index] + ((index < size - 1) ? "," : "");
     	}
     	string += "}";
     	
