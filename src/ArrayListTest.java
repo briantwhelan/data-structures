@@ -1,9 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 /*************************************************************************
- *  ArrayList test class.
+ *  {@code ArrayList} test class.
  *
- *  @version 6/7/21
+ *  @version 22/7/21
  *
  *  @author Brian Whelan
  *
@@ -11,40 +11,40 @@ import org.junit.Test;
 public class ArrayListTest 
 {
     /**
-     * Test ArrayList() 
+     * Test {@code ArrayList()} 
      */
     @Test
     public void testConstructor1()
     {  	
-    	new ArrayList();
+    	new ArrayList<Integer>();
     }
     
     /**
-     * Test ArrayList(int initialCapacity) 
+     * Test {@code ArrayList(int initialCapacity)} 
      */
     @Test
     public void testConstructor2()
     {  	
-    	new ArrayList(10);
-    	try{new ArrayList(-1);}catch(Exception e){};
+    	new ArrayList<Integer>(10);
+    	try{new ArrayList<Integer>(-1);}catch(Exception e){};
     }
     
     /**
-     * Test ArrayList(T[] array) 
+     * Test {@code ArrayList(T[] array)} 
      */
     @Test
     public void testConstructor3()
     {  	
-    	new ArrayList(new Integer[] {5, 10, 15});
+    	new ArrayList<Integer>(new Integer[] {5, 10, 15});
     }
     
     /**
-     * Test size()
+     * Test {@code size()}
      */
     @Test
     public void testSize()
     {
-    	ArrayList<Integer> arrayList = new ArrayList();
+    	ArrayList<Integer> arrayList = new ArrayList<Integer>();
     	 
     	assertEquals("Testing size()", 0, arrayList.size());
     	arrayList.add(5);
@@ -56,12 +56,12 @@ public class ArrayListTest
     }
     
     /**
-     * Test add(T element)
+     * Test {@code add(T element)}
      */
     @Test
     public void testAdd()
     {
-    	ArrayList<Integer> arrayList = new ArrayList();
+    	ArrayList<Integer> arrayList = new ArrayList<Integer>();
     	
     	assertEquals("Testing add(T element)", "{}", arrayList.toString());
     	arrayList.add(5);
@@ -73,12 +73,12 @@ public class ArrayListTest
     }
     
     /**
-     * Test remove(int index)
+     * Test {@code remove(int index)}
      */
     @Test
     public void testRemove()
     {
-    	ArrayList<Integer> arrayList = new ArrayList(new Integer[] {5, 10, 15, 20});
+    	ArrayList<Integer> arrayList = new ArrayList<Integer>(new Integer[] {5, 10, 15, 20});
     	
     	assertEquals("Testing remove(int index) - Removing invalid index (negative)", null, arrayList.remove(-1));
     	assertEquals("Testing remove(int index) - Removing invalid index (positive)", null, arrayList.remove(4));
@@ -94,7 +94,7 @@ public class ArrayListTest
     @Test
     public void testGet()
     {
-    	ArrayList<Integer> arrayList = new ArrayList(new Integer[] {5, 10, 15});
+    	ArrayList<Integer> arrayList = new ArrayList<Integer>(new Integer[] {5, 10, 15});
     	
     	assertEquals("Testing get(int index) - Getting invalid index (negative)", null, arrayList.get(-1));
     	assertEquals("Testing get(int index) - Getting invalid index (positive)", null, arrayList.get(3));
@@ -104,12 +104,12 @@ public class ArrayListTest
     }
     
     /**
-     * Test toString()
+     * Test {@code toString()}
      */
     @Test
     public void testToString()
     {
-    	ArrayList<Integer> arrayList = new ArrayList();
+    	ArrayList<Integer> arrayList = new ArrayList<Integer>();
     	
     	assertEquals("Testing toString()", "{}", arrayList.toString());
     	arrayList.add(5);
