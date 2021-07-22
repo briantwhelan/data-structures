@@ -120,7 +120,7 @@ public class ArrayList<T>
     	    if((size > 0) && (size <= arrayList.length/4))
     	    {
 	    	    resize(arrayList.length/2);
-	    	}
+    	    }
     	}
 		
     	return element;
